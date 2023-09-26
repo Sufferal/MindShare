@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="login-img">
+    <img src="assets/img/login.png" alt="login">
+  </div>
+  
+  <form class="form" [formGroup]="login" (ngSubmit)="onSubmit()">
+    <h1 class="form-title">MindShare</h1>
+    <div class="form-group error">
+      <input class="form-control" type="email" id="email"
+      placeholder="email" formControlName="email">
+      <label class="form-label" for="email">Email</label>
+      <div *ngIf="login.controls.email.invalid && 
+            (login.controls.email.dirty || login.controls.email.touched)" class="form-errors">
+        <p *ngIf="login.controls.email.hasError('required')" class="error-msg">Email is required</p>
+        <p *ngIf="login.controls.email.hasError('email')" class="error-msg">Email is invalid</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <input class="form-control" type="password" id="password" 
+      placeholder="password" formControlName="password">
+      <label class="form-label" for="password">Password</label>
+      <div *ngIf="login.controls.password.invalid &&
+       (login.controls.password.dirty || login.controls.password.touched)" class="form-errors">
+        <p *ngIf="login.controls.password.hasError('required')" class="error-msg">Password is required</p>
+      </div>
+    </div>
+    <p class="form-link-wrapper">
+      Don't have an account yet? <a class="form-link" (click)="navigateToRegister()">Sign up</a>
+    </p>
+    <button class="form-submit" type="submit" 
+    [ngClass]="{'disabled': !login.valid && login.dirty}" 
+    [disabled]="!login.valid && login.dirty">Log In</button>
+  </form>
+</div>

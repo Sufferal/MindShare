@@ -1,0 +1,136 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-img {
+  img {
+    width: 80%;
+    height: auto;
+  }
+}
+
+.form {
+  background-color: var(--form-primary-color);
+  background: linear-gradient(45deg, var(--form-secondary-color) 10%, var(--form-primary-color) 100%);
+  
+  width: 50%;
+  height: 60vh;
+  padding: 5rem;
+  border-radius: 30px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  & * {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--form-tertiary-color);
+  }
+
+  .form-title {
+    font-size: 4.5rem;
+    margin-bottom: 6rem;
+    color: var(--form-tertiary-color);
+  }
+
+  .form-group {
+    width: 100%;
+    position: relative;
+    margin-bottom: 5rem;
+
+    display: flex;
+    flex-direction: column;
+
+    // When the input is focused
+    .form-label {
+      margin-bottom: 1rem;
+      position: absolute;
+      top: -15px;
+      display: block;
+      transition: 0.2s;
+      font-size: 2rem;
+      color: var(--form-tertiary-color);
+    }
+
+    .form-control {
+      padding: 1rem;
+      width: 100%;
+
+      border-bottom: 2px solid var(--form-tertiary-color);
+      color: var(--form-tertiary-color);
+      background: transparent;
+      transition: border-color 0.2s;
+
+      &::placeholder {
+        color: transparent;
+      }
+
+      // When the input is empty
+      &:placeholder-shown ~ .form-label {
+        font-size: 1.5rem;
+        cursor: text;
+        top: 20px;
+      }
+
+      &:required,
+      &:invalid { 
+        box-shadow:none; 
+      }
+
+      &:focus {
+        ~ .form-label {
+          position: absolute;
+          top: -15px;
+          display: block;
+          transition: 0.2s;
+          font-size: 2rem;
+          color: var(--form-highlight-color);
+          font-weight: 700;    
+        }
+    
+        padding-bottom: 6px;  
+        font-weight: 700;
+
+        border-width: 3px;
+        border-image: linear-gradient(to right, var(--form-highlight-color), var(--form-secondary-color));
+        border-image-slice: 1;
+      }
+    }
+
+    .form-errors {
+      margin-top: 1rem;
+    }
+  }
+
+  .form-link-wrapper {
+    font-size: 1.5rem;
+
+    .form-link {
+      font-size: 1.5rem;
+      color: var(--form-highlight-color);
+    }
+  }
+
+  .form-submit {
+    margin-top: 3rem;
+    width: 40%;
+    border-radius: 30px;
+    padding: 1rem;
+    font-size: 2rem;
+
+    background: linear-gradient(90deg, var(--form-highlight-color) 0%, var(--form-secondary-color) 100%);
+    color: var(--form-tertiary-color);
+    font-weight: bold;
+
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      background: var(--form-tertiary-color);
+      color: var(--form-secondary-color);
+    }
+  }
+}
