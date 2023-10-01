@@ -30,9 +30,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/assets/scss/main.scss",
-              "src/assets/scss/utilities.scss",
-              "src/assets/fonts/raleway/raleway.scss"
+              
             ],
             "scripts": []
           },
@@ -95,14 +93,15 @@
               "src/assets"
             ],
             "styles": [
-              "src/assets/scss/main.scss",
-              "src/assets/scss/utilities.scss",
-              "src/assets/fonts/raleway/raleway.scss"
+              
             ],
             "scripts": []
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
