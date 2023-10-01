@@ -8,8 +8,8 @@ const routes: Routes = [
     redirectTo: 'login'
   },
   {
-    path: 'login',
-    loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule)
+    path: 'posts',
+    loadChildren: () => import('./modules/posts/posts.module').then(m => m.PostsModule)
   },
 ];
 
