@@ -2,37 +2,35 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AuthPageComponent } from './pages/auth-page/auth-page.component';
-import { RegisterComponent } from './components/register/register.component';
-import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent, LoginComponent } from './components';
 
 import { Routes, RouterModule } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 
 const routes: Routes = [
   {
     path: '',
-    component: AuthPageComponent
+    component: AuthPageComponent,
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
   },
   {
     path: 'register',
     component: RegisterComponent,
-  }
+  },
 ];
 
 @NgModule({
-  declarations: [
-    AuthPageComponent,
-    RegisterComponent,
-    LoginComponent
-  ],
+  declarations: [AuthPageComponent, RegisterComponent, LoginComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+    FormsModule,
+    MatIconModule,
+  ],
 })
-export class AuthModule { }
+export class AuthModule {}

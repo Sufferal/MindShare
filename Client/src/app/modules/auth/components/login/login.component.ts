@@ -1,28 +1,40 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
+import {
+  FormBuilder,
+  Validators,
+  FormControl,
+  FormGroup,
+} from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  @Output() showLoginEvent = new EventEmitter<boolean>();
+  constructor(private router: Router) {}
   navigateToRegister() {
-    this.showLoginEvent.emit(true);
+    this.router.navigateByUrl('/register');
   }
 
-  login = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', Validators.required)
-  });
+  public readonly emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
 
+  login = new FormGroup({
+    email: new FormControl('', [
+      Validators.required,
+      Validators.email,
+      Validators.pattern(this.emailRegex),
+    ]),
+    password: new FormControl('', Validators.required),
+  });
+  
   onSubmit() {
     if (this.login.valid) {
       console.log(this.login.value);
     } else {
       // Mark all fields as touched to display errors
-      this.login.markAllAsTouched(); 
+      this.login.markAllAsTouched();
     }
   }
 }

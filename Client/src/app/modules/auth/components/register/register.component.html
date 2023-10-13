@@ -1,4 +1,126 @@
-<p>
-  Already have an account? <a class="form-link" (click)="navigateToLogin()">Sign up</a>
-</p>
+<main class="main">
+  <div class="container">
+    <div class="register-info">
+      <h1 class="register-title unselectable">MindShare</h1>
+      <p class="register-desc">Your safe space for mental health support and inspiration.</p>
+    </div>
+    
+    <form *ngIf="step === 1" class="form" [formGroup]="personalDetails">
+      <div class="form-group">
+        <div *ngIf="personalDetails.controls['firstName'].invalid
+          && (personalDetails.controls['firstName'].dirty || personalDetails.controls['firstName'].touched)" class="form-errors">
+          <p *ngIf="personalDetails.controls['firstName'].hasError('required')" class="error-msg">First name is required</p>
+        </div>  
+        <label for="fname" class="visually-hidden">First name</label>
+        <input class="form-control" type="text" id="fname" placeholder="First name*"
+          formControlName="firstName">
+      </div>
+      <div class="form-group">
+        <div *ngIf="personalDetails.controls['lastName'].invalid
+          && (personalDetails.controls['lastName'].dirty || personalDetails.controls['lastName'].touched)" class="form-errors">
+          <p *ngIf="personalDetails.controls['lastName'].hasError('required')" class="error-msg">Last name is required</p>
+        </div>
+        <label for="lname" class="visually-hidden">Last name</label>
+        <input class="form-control" type="text" id="lname" placeholder="Last name*"
+          formControlName="lastName">
+      </div>
+      <div class="form-group">
+        <div *ngIf="personalDetails.controls['dateOfBirth'].invalid
+          && (personalDetails.controls['dateOfBirth'].dirty || personalDetails.controls['dateOfBirth'].touched)" class="form-errors">
+          <p *ngIf="personalDetails.controls['dateOfBirth'].hasError('required')" class="error-msg">Date of birth is required</p>
+        </div>
+        <label for="dob" class="visually-hidden">Date of Birth</label>
+        <input class="form-control" type="date" id="dob" placeholder="Date"
+          min="1950-01-01" max="2009-12-31"
+          formControlName="dateOfBirth">
+      </div>
+      <div [ngClass]="{'highlight': personalDetails.value.gender !== ''}" class="form-group form-group-gender">
+        <div *ngIf="personalDetails.controls['gender'].invalid && personalDetails.controls['gender'].touched" class="form-errors">
+          <p *ngIf="personalDetails.controls['gender'].hasError('required')" class="error-msg">Gender is required</p>
+        </div>
+        <label>Gender:</label>
+        <input class="form-control" type="radio" id="male" name="gender" value="male"
+        formControlName="gender">
+        <label [ngClass]="{'highlight': personalDetails.value.gender === 'male'}" for="male">Male</label>
+        
+        <input class="form-control" type="radio" id="female" name="gender" value="female"
+        formControlName="gender">
+        <label [ngClass]="{'highlight': personalDetails.value.gender === 'female'}" for="female">Female</label>
+        
+        <input class="form-control" type="radio" id="other" name="gender" value="other"
+        formControlName="gender">
+        <label [ngClass]="{'highlight': personalDetails.value.gender === 'other'}" for="other">Other</label>
+
+        <div class="other">
+          <input *ngIf="personalDetails.value.gender !== 'male' && personalDetails.value.gender !== 'female' && 
+                        personalDetails.value.gender !== ''" 
+          class="form-control form-control-gender" 
+          type="text" name="other" id="other" placeholder="Gender (optional)"
+          formControlName="gender">
+        </div>
+      </div>
+      <p class="form-link-wrapper">
+        Already have an account? <a class="form-link" (click)="navigateToLogin()">Log in</a>
+      </p>
+      <div class="form-btn-wrapper">
+        <button  
+        class="btn btn-form form-btn form-btn-next" type="button" (click)="next(personalDetails.dirty)"
+        [ngClass]="{'disabled': personalDetails.invalid && personalDetails.dirty}" 
+        [disabled]="personalDetails.invalid && personalDetails.dirty">Next 
+          <mat-icon>chevron_right</mat-icon>
+        </button>
+      </div>
+    </form>
+
+    <form *ngIf="step === 2" class="form" (ngSubmit)="onSubmit()" [formGroup]="socialDetails">
+        <div class="form-group">
+          <div *ngIf="socialDetails.controls['username'].invalid
+            && (socialDetails.controls['username'].dirty || socialDetails.controls['username'].touched)" class="form-errors">
+            <p *ngIf="socialDetails.controls['username'].hasError('required')" class="error-msg">Username is required</p>
+          </div>
+          <label for="username" class="visually-hidden">Username</label>
+          <input class="form-control" type="text" id="username" placeholder="Username*"
+            formControlName="username">
+        </div>
+        <div class="form-group">
+          <div *ngIf="socialDetails.controls['email'].invalid
+            && (socialDetails.controls['email'].dirty || socialDetails.controls['email'].touched)" class="form-errors">
+            <p *ngIf="socialDetails.controls['email'].hasError('required')" class="error-msg">Email is required</p>
+          </div>
+          <label for="email" class="visually-hidden">Email</label>
+          <input class="form-control" type="email" id="email" placeholder="Email*"
+            formControlName="email">
+        </div>
+        <div class="form-group">
+          <div *ngIf="socialDetails.controls['password'].invalid
+            && (socialDetails.controls['password'].dirty || socialDetails.controls['password'].touched)" class="form-errors">
+            <p *ngIf="socialDetails.controls['password'].hasError('required')" class="error-msg">Password is required</p>
+          </div>
+          <label class="password-label" for="password">Password</label>
+          <input class="form-control form-control-password" type="password" id="password" 
+            formControlName="password">
+        </div>
+        <div class="form-group">
+          <div *ngIf="socialDetails.controls['confirmPassword'].invalid
+            && (socialDetails.controls['confirmPassword'].dirty || socialDetails.controls['confirmPassword'].touched)" class="form-errors">
+            <p *ngIf="socialDetails.controls['confirmPassword'].hasError('required')" class="error-msg">Repeat password is required</p>
+          </div>
+          <label class="password-label" for="confirmPassword">Confirm password</label>
+          <input class="form-control form-control-password" type="password" id="confirmPassword" 
+            formControlName="confirmPassword">
+        </div>
+        <div class="form-btn-wrapper form-btn-wrapper-password">
+          <button class="btn btn-form form-btn form-btn-prev" type="button" (click)="prev()">
+            <mat-icon>chevron_left</mat-icon>
+            Back
+          </button>
+          <button class="btn btn-form form-btn form-btn-next" type="submit"
+          [ngClass]="{'disabled': socialDetails.invalid && socialDetails.dirty}" 
+          [disabled]="socialDetails.invalid && socialDetails.dirty"
+          >Submit </button>
+        </div>
+    </form>
+  </div>
+</main>
+
 
