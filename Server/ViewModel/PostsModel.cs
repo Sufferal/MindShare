@@ -1,5 +1,4 @@
-namespace Server.Model.Database;
-
+namespace Server.ViewModel;
 public class PostsModel
 {
     public int Id { get; set; }

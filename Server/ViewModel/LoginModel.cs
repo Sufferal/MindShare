@@ -1,4 +1,4 @@
-namespace Server.Model.Database;
+namespace Server.ViewModel;
 
 public class LoginModel
 {

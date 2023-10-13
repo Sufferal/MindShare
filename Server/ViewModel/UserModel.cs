@@ -1,5 +1,4 @@
-namespace Server.Model.Database;
-
+namespace Server.ViewModel;
 public class UserModel
 {
     public string Username { get; set; }
