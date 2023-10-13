@@ -17,8 +17,6 @@
   
   width: 50%;
   height: 60vh;
-  padding: 5rem;
-  border-radius: 30px;
 
   display: flex;
   flex-direction: column;
@@ -118,18 +116,8 @@
   .form-submit {
     margin-top: 3rem;
     width: 40%;
-    border-radius: 30px;
-    padding: 1rem;
-    font-size: 2rem;
-
-    background: linear-gradient(90deg, var(--form-highlight-color) 0%, var(--form-secondary-color) 100%);
-    color: var(--form-tertiary-color);
-    font-weight: bold;
-
-    transition: all 0.3s ease-in-out;
 
     &:hover {
-      background: var(--form-tertiary-color);
       color: var(--form-secondary-color);
     }
   }

@@ -1,13 +1,4 @@
-:root {
-  --default-primary-color: #000;
-
-  --form-primary-color: #00d4ff;
-  --form-secondary-color: #a020f0;
-  --form-tertiary-color: #fff;
-  --form-highlight-color: #ffe600;
-
-  --primary-font: 'Raleway', Arial, sans-serif;
-}
+@import url('./variables.scss');
 
 * {
   margin: 0;

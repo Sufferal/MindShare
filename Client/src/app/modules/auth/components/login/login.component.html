@@ -12,7 +12,7 @@
       <div *ngIf="login.controls.email.invalid && 
             (login.controls.email.dirty || login.controls.email.touched)" class="form-errors">
         <p *ngIf="login.controls.email.hasError('required')" class="error-msg">Email is required</p>
-        <p *ngIf="login.controls.email.hasError('email')" class="error-msg">Email is invalid</p>
+        <p *ngIf="login.controls.email.hasError('pattern')" class="error-msg">Email is invalid</p>
       </div>
     </div>
     <div class="form-group">
@@ -27,7 +27,7 @@
     <p class="form-link-wrapper">
       Don't have an account yet? <a class="form-link" (click)="navigateToRegister()">Sign up</a>
     </p>
-    <button class="form-submit" type="submit" 
+    <button class="form-submit btn btn-form" type="submit" 
     [ngClass]="{'disabled': !login.valid && login.dirty}" 
     [disabled]="!login.valid && login.dirty">Log In</button>
   </form>
