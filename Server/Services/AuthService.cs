@@ -25,7 +25,7 @@ public class AuthService
 
     public async Task<User> LoginUser(string username, string password)
     {
-        // You can perform any additional validation or business logic here
+        // TODO: Password hashing
         return await _userRepository.LoginUser(username, password);
     }
 

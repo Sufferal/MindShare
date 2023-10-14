@@ -17,15 +17,15 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<User>(entity =>
         {
             entity.Property(e => e.Username)
-                .HasMaxLength(255) // Set an appropriate maximum length
+                .HasMaxLength(255)
                 .IsRequired();
 
             entity.Property(e => e.Email)
-                .HasMaxLength(255) // Set an appropriate maximum length
+                .HasMaxLength(255)
                 .IsRequired();
 
             entity.Property(e => e.Password)
-                .HasMaxLength(255) // Set an appropriate maximum length
+                .HasMaxLength(255)
                 .IsRequired();
         });
     }

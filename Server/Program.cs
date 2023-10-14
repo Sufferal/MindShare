@@ -2,8 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using Server.Data;
 using Server.Services;
 
-//using Server.Services;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
