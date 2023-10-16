@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { PostsApiService } from '../../services/posts.api.service';
+import { PostsApiService } from '../../services/posts-api.service';
 
 @Component({
   selector: 'app-posts-create-form',
