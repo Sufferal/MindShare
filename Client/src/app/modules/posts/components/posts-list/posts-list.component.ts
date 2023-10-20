@@ -15,7 +15,13 @@ export class PostsListComponent implements OnInit {
   ngOnInit(): void {
     this.postsService.getPosts().subscribe(data => {
       for (let object of data) {
-        const post = new Post(object.title, object.author, object.content, object.creationDate, object.comments);
+        const post: Post = {
+          title: object.title,
+          author: object.author,
+          content: object.content,
+          creationDate: object.creationDate,
+          comments: object.comments 
+        };
         this.posts.push(post);
       }
     })

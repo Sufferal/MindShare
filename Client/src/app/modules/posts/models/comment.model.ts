@@ -1,3 +1,5 @@
-export class Comment {
-    constructor(public author: string, public creationDate: Date, public content: string) {}
+export interface Comment {
+    author: string;
+    creationDate: Date;
+    content: string;
 }
