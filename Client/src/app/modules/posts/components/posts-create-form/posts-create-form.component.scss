@@ -1,7 +1,10 @@
-.post-form {
-  position: relative;
-  width: 100%;
-  background-color: #ffffff;
+.post-create-form {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  background-color: white;
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border: 5px solid #a020f0;
@@ -12,7 +15,11 @@
 .form-content {
   display: flex;
   flex-direction: column;
-  align-items: center;
+}
+
+.form-errors {
+  font-size: 1rem;
+  color: red;
 }
 
 .form-group {
@@ -25,14 +32,9 @@
   padding: 5px;
   border: none;
   border-bottom: 1px solid #a020f0;
+  font-family: 'Courier New', Courier, monospace;
   font-size: 1rem;
   background-color: transparent;
-}
-
-.form-group.content label {
-  align-self: flex-start;
-  font-weight: bold;
-  margin-bottom: 5px;
 }
 
 button[type="submit"] {
@@ -49,4 +51,15 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
   background-color: #9000e1;
+}
+
+.notification {
+  background-color: #4CAF50;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  position: fixed;
+  top: 170px; 
+  left: 0; 
+  right: 0;
 }

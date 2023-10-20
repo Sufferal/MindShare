@@ -1,5 +1,6 @@
 const http = require('http');
-const cors = require('cors')
+const cors = require('cors');
+const express = require('express');
 
 const jsonData = [
   { title: 'Initial', author: 'Seva', creationDate: new Date().toDateString(), content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, \
@@ -25,25 +26,23 @@ const jsonData = [
   mollit anim id est laborum.' , comments: [{author: 'Cip', creationDate: new Date().toDateString(), content: 'hello'}]}
 ];
 
-const server = http.createServer((req, res) => {
-    res.setHeader('Content-Type', 'application/json');
+const app = express();
 
-    if (req.method === 'GET') {
-    if (req.url === '/data') {
-        cors()(req, res, () => {
-            res.end(JSON.stringify(jsonData));
-        });
-    } else {
-        res.statusCode = 404;
-        res.end(JSON.stringify({ error: 'Not Found' }));
-    }
-    } else {
-    res.statusCode = 405;
-    res.end(JSON.stringify({ error: 'Method Not Allowed' }));
-    }
+app.use(cors());
+
+app.get('/data', (req, res) => {
+  res.setHeader('Content-Type', 'application/json');
+  res.end(JSON.stringify(jsonData));
+});
+
+app.post('/create', (req, res) => {
+  console.log(req);
+  res.setHeader('Content-Type', 'application/json');
+  res.end(JSON.stringify('Post created'));
 });
 
 const port = 3000;
-server.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+
+http.createServer(app).listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
 });

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PostsApiService } from '../../services/posts-api.service';
-import { Post } from '../../models/post.model';
+import { Post } from '../../models';
 
 @Component({
   selector: 'app-posts-list',
@@ -13,15 +13,8 @@ export class PostsListComponent implements OnInit {
   constructor(private postsService: PostsApiService) {}
 
   ngOnInit(): void {
-    this.postsService.getPosts().subscribe(data => {
-      for (let object of data) {
-        const post: Post = {
-          title: object.title,
-          author: object.author,
-          content: object.content,
-          creationDate: object.creationDate,
-          comments: object.comments 
-        };
+    this.postsService.getPosts().subscribe((data: Post[]) => {
+      for (let post of data) {
         this.posts.push(post);
       }
     })
