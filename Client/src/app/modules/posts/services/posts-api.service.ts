@@ -1,15 +1,26 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { Post } from '../models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostsApiService {
+  url: string = 'http://127.0.0.1:3000';
+
   constructor(private http: HttpClient) { }
   
-  getPosts(): Observable<any> {
-    const url = 'http://127.0.0.1:3000/data'
-    return this.http.get(url)
+  getPosts() {
+    return this.http.get<Post[]>(`${this.url}/data`);
+  }
+
+  createPost(newPost: Post) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    return this.http.post<Post>(`${this.url}/create`, newPost, httpOptions);
   }
 }

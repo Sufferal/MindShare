@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PostsApiService } from '../../services/posts-api.service';
+import { Post } from '../../models';
 
 @Component({
   selector: 'app-posts-create-form',
@@ -8,14 +9,39 @@ import { PostsApiService } from '../../services/posts-api.service';
   styleUrls: ['./posts-create-form.component.scss']
 })
 export class PostsCreateFormComponent {
+  minTitleLength: number = 7;
+  maxTitleLength: number = 50;
+
+  minContentLength: number = 10;
+
+  showNotification: boolean = false;
+
   postCreationForm = new FormGroup({
-    title: new FormControl(''),
-    content: new FormControl('')
+    title: new FormControl('', [
+      Validators.required,
+      Validators.minLength(this.minTitleLength),
+      Validators.maxLength(this.maxTitleLength)
+    ]),
+    content: new FormControl('', [
+      Validators.required,
+      Validators.minLength(this.minContentLength)
+    ])
   });
 
   constructor(private postsService: PostsApiService) {}
 
   onSubmit() {
+    const newPost: Post = {
+      title: this.postCreationForm.get('title')?.value as string,
+      author: 'Author',
+      content: this.postCreationForm.get('content')?.value as string,
+      creationDate: new Date(),
+      comments: []
+    };
 
+    const req = this.postsService.createPost(newPost);
+    req.subscribe(() => {
+      this.showNotification = true;
+    });
   }
 }
