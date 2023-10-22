@@ -1,4 +1,6 @@
 <div>
     <app-posts-list></app-posts-list>
-    <app-posts-create-form></app-posts-create-form>
+    <button (click)="showPostForm = true" class="post-form-init"> Create Post </button>
+    <button (click)="showPostForm = false" class="post-form-decline"> Close Post Form </button>
+    <app-posts-create-form *ngIf="showPostForm == true"></app-posts-create-form>
 </div>
