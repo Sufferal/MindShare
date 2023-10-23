@@ -1,4 +1,4 @@
-<div class="post-create-form">
+<!-- <div class="post-create-form">
     <div class="form-content">
       <form [formGroup]="postCreationForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
@@ -22,5 +22,29 @@
         <div class="notification" *ngIf="showNotification">Post submitted succesfully!</div>
       </form>
     </div>
+  </div> -->
+<div class="posts-form-wrapper">
+  <div class="posts-form-header">
+    <span class="posts-form-title">Create post</span>
+    <button mat-icon-button color="primary" (click)="closeDialog()">
+      <mat-icon>close</mat-icon>
+    </button>
   </div>
-  
+  <form class="posts-form">
+    <mat-form-field class="full-width">
+      <mat-label>Favorite food</mat-label>
+      <input matInput placeholder="Ex. Pizza" value="Sushi" />
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Leave a comment</mat-label>
+      <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+    </mat-form-field>
+
+    <div class="posts-form-actions">
+      <button mat-raised-button color="primary" type="submit">
+        {{ "save" | uppercase }}
+      </button>
+    </div>
+  </form>
+</div>
