@@ -1,11 +1,21 @@
-<div class="posts-item">
-    <div class="post-title">{{ post.title }}</div>
-        <div class="post-author">Author: {{ post.author }}</div>
-        <div class="post-content">{{ post.content }}</div>
-        <div class="post-creation-date">{{ post.creationDate }}</div>
+<div class="posts-item-wrapper">
+    <mat-card class="posts-item">
+        <mat-card-header class="posts-item-header">
+            <mat-card-title class="post-title">{{ post.title }}</mat-card-title>
+            <mat-card-subtitle class="post-author">{{ post.author }}</mat-card-subtitle>
+            <div class="post-creation-date">
+                <p>{{ post.creationDate }}</p>
+            </div>
+        </mat-card-header>
+
+        <mat-card-content class="post-content">
+            <p>{{ post.content }}</p>
+        </mat-card-content>
+
         <div class="post-comments">
-            <div *ngFor="let comment of post.comments" class="comments-list">
+            <div *ngFor="let comment of post.comments">
                 <app-comments-item [comment]="comment"></app-comments-item>
             </div>
         </div>
-    </div>
+    </mat-card>
+</div>
