@@ -34,7 +34,7 @@ export class PostsCreateFormComponent {
     public dialogRef: MatDialogRef<PostsCreateFormComponent>
   ) {}
 
-  onSubmit() {
+  onSubmit(): void {
     const newPost: Post = {
       title: this.postCreationForm.get('title')?.value as string,
       author: 'Author',
@@ -44,7 +44,7 @@ export class PostsCreateFormComponent {
     };
 
     const req = this.postsService.createPost(newPost);
-    req.subscribe((res) => {
+    req.subscribe(() => {
       this.showNotification = true;
     });
   }

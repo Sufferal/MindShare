@@ -48,7 +48,7 @@ app.post('/create', (req, res) => {
     // Your POST request handling logic
     res.setHeader('Content-Type', 'application/json');
     let data = req.body;
-    res.send('Data Received: ' + JSON.stringify(data));
+    res.send({'ack': 'OK'});
     jsonData.push(data);
   } catch (error) {
     console.error(error);

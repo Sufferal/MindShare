@@ -11,17 +11,17 @@ export class PostsApiService {
 
   constructor(private http: HttpClient) { }
   
-  getPosts() {
+  getPosts(): Observable<Post[]> {
     return this.http.get<Post[]>(`${this.url}/data`);
   }
 
-  createPost(newPost: Post): Observable <Post> {
+  createPost(newPost: Post): any {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
 
-      return this.http.post<Post>(`${this.url}/create`, newPost, httpOptions);
-    }
+    return this.http.post<any>(`${this.url}/create`, newPost, httpOptions);
+  }
 }
