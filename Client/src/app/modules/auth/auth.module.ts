@@ -8,11 +8,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { AuthRoutingModule } from './auth-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AuthPageComponent, RegisterComponent, LoginComponent],
   imports: [
     CommonModule,
+    HttpClientModule,
     AuthRoutingModule,
     ReactiveFormsModule,
     FormsModule,

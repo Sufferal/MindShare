@@ -3,32 +3,33 @@
     <img src="assets/img/login.png" alt="login">
   </div>
   
-  <form class="form" [formGroup]="login" (ngSubmit)="onSubmit()">
+  <form class="form" [formGroup]="this.login" (ngSubmit)="onSubmit()">
     <h1 class="form-title">MindShare</h1>
     <div class="form-group error">
       <input class="form-control" type="email" id="email"
       placeholder="email" formControlName="email">
       <label class="form-label" for="email">Email</label>
-      <div *ngIf="login.controls.email.invalid && 
-            (login.controls.email.dirty || login.controls.email.touched)" class="form-errors">
-        <p *ngIf="login.controls.email.hasError('required')" class="error-msg">Email is required</p>
-        <p *ngIf="login.controls.email.hasError('pattern')" class="error-msg">Email is invalid</p>
+      <div *ngIf="this.login.controls['email'].invalid && 
+            (this.login.controls['email'].dirty || this.login.controls['email'].touched)" class="form-errors">
+        <p *ngIf="this.login.controls['email'].hasError('required')" class="error-msg">Email is required</p>
+        <p *ngIf="this.login.controls['email'].hasError('pattern')" class="error-msg">Email is invalid</p>
       </div>
     </div>
     <div class="form-group">
       <input class="form-control" type="password" id="password" 
       placeholder="password" formControlName="password">
       <label class="form-label" for="password">Password</label>
-      <div *ngIf="login.controls.password.invalid &&
-       (login.controls.password.dirty || login.controls.password.touched)" class="form-errors">
-        <p *ngIf="login.controls.password.hasError('required')" class="error-msg">Password is required</p>
+      <div *ngIf="this.attemptLogin || this.login.controls['password'].invalid &&
+       (this.login.controls['password'].dirty || this.login.controls['password'].touched)" class="form-errors">
+        <p *ngIf="this.login.controls['password'].hasError('required')" class="error-msg">Password is required</p>
+        <p *ngIf="this.attemptLogin && !this.login.controls['password'].hasError('required')" class="error-msg">Invalid email or password</p>
       </div>
     </div>
     <p class="form-link-wrapper">
       Don't have an account yet? <a class="form-link" (click)="navigateToRegister()">Sign up</a>
     </p>
     <button class="form-submit btn btn-form" type="submit" 
-    [ngClass]="{'disabled': !login.valid && login.dirty}" 
-    [disabled]="!login.valid && login.dirty">Log In</button>
+    [ngClass]="{'disabled': !this.login.valid && this.login.dirty}" 
+    [disabled]="!this.login.valid && this.login.dirty">Log In</button>
   </form>
 </div>
