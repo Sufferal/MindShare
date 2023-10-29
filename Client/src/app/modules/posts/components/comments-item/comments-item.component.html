@@ -1,5 +1,12 @@
-<div class="comments-item">
-    <div class="comment-author"> {{ comment.author }} </div>
-    <div class="comment-content"> {{ comment.content }} </div>
-    <div class="comment-creation-date"> {{ comment.creationDate }} </div>
+<div class="comments-item-wrapper">
+    <mat-card class="comments-item">
+        <mat-card-header class="comments-item-header">
+            <p class="comment-author">{{ comment.author }}</p>
+            <p class="comment-creation-date">{{ comment.creationDate }}</p>
+        </mat-card-header>
+
+        <mat-card-content class="comment-content">
+            <p>{{ comment.content }}</p>
+        </mat-card-content>
+    </mat-card>
 </div>

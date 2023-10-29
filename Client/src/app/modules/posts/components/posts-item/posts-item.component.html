@@ -12,10 +12,8 @@
             <p>{{ post.content }}</p>
         </mat-card-content>
 
-        <div class="post-comments">
-            <div *ngFor="let comment of post.comments">
-                <app-comments-item [comment]="comment"></app-comments-item>
-            </div>
+        <div *ngFor="let comment of post.comments">
+            <app-comments-item [comment]="comment"></app-comments-item>
         </div>
     </mat-card>
 </div>
