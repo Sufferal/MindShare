@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import {
   FormBuilder,
   Validators,
@@ -6,34 +6,45 @@ import {
   FormGroup,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthApiService } from '../../services/auth-api.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent {
-  constructor(private router: Router) {}
-  navigateToRegister() {
-    this.router.navigateByUrl('/register');
-  }
+export class LoginComponent implements OnInit {
+  login!: FormGroup;
+  attemptLogin: boolean = false;
 
   public readonly emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
 
-  login = new FormGroup({
-    email: new FormControl('', [
-      Validators.required,
-      Validators.email,
-      Validators.pattern(this.emailRegex),
-    ]),
-    password: new FormControl('', Validators.required),
-  });
+  constructor(private userService: AuthApiService, 
+              private fb: FormBuilder,
+              private router: Router) {}
+           
+  ngOnInit(): void {
+    this.login = this.fb.group({
+      email: ['kevinhart@gmail.com', [Validators.required, Validators.email, Validators.pattern(this.emailRegex)]],
+      password: ['qwerty', Validators.required],
+    });
+  }
+
+  navigateToRegister() {
+    this.router.navigateByUrl('/register');
+  }
   
   onSubmit() {
     if (this.login.valid) {
-      console.log(this.login.value);
+      const loginData = { ...this.login.value };
+      this.userService.getUser(loginData).subscribe((res) => {
+        if(res) {
+          this.navigateToRegister();
+        } else {
+          this.attemptLogin = true;
+        }
+      });
     } else {
-      // Mark all fields as touched to display errors
       this.login.markAllAsTouched();
     }
   }
