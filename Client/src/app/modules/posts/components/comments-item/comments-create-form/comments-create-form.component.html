@@ -4,11 +4,9 @@
             <textarea matInput placeholder="Leave a comment.." formControlName="content"></textarea>
             <mat-error *ngIf="commentCreationForm.controls.content.hasError('required')"> Comment cannot be empty </mat-error>
         </mat-form-field>
-    </form>
 
-    <div class="comment-form-action">
         <button mat-raised-button color="primary" type="submit">
             {{ "Submit" | uppercase }}
         </button>
-    </div>
+    </form>
 </div>

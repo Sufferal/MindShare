@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Post } from '../models';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostsApiService {
-  url: string = 'http://127.0.0.1:3000';
+  url: string = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
   
@@ -23,5 +24,9 @@ export class PostsApiService {
     };
 
     return this.http.post<any>(`${this.url}/create`, newPost, httpOptions);
+  }
+
+  updatePost(updatedPost: Post): any {
+
   }
 }
