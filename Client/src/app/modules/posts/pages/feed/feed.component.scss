@@ -1,7 +1,14 @@
 .feed-wrapper {
+  background-color: #F2DCA6;
+
   .feed-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-left: 10px;
+  }
+
+  .feed-actions-group {
+    padding-right: 20px;
   }
 }

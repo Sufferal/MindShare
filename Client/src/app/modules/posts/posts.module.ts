@@ -17,6 +17,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { CommentsCreateFormComponent } from './components/comments-item/comments-create-form/comments-create-form.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     PostsItemComponent,
     CommentsItemComponent,
     PostsCreateFormComponent,
+    CommentsCreateFormComponent,
   ],
   imports: [
     CommonModule,

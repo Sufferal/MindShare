@@ -16,8 +16,6 @@ export class PostsCreateFormComponent {
 
   minContentLength: number = 10;
 
-  showNotification: boolean = false;
-
   postCreationForm = new FormGroup({
     title: new FormControl('', [
       Validators.required,
@@ -53,9 +51,8 @@ export class PostsCreateFormComponent {
       };
   
       const req = this.postsService.createPost(newPost);
-      req.subscribe(() => {
-        this.showNotification = true;
-      });
+      req.subscribe();
+
     } else {
       this.notificationBar.open("Post cannot be created", "Close", {
         duration: 2000,
