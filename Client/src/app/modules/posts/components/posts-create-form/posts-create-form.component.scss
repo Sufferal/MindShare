@@ -1,65 +1,29 @@
-.post-create-form {
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 50%;
-  background-color: white;
-  padding: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border: 5px solid #a020f0;
-  border-radius: 5px;
-  margin-bottom: 20px;
-}
+.posts-form-wrapper {
+  padding: 20px 20px;
 
-.form-content {
-  display: flex;
-  flex-direction: column;
-}
+  .posts-form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 
-.form-errors {
-  font-size: 1rem;
-  color: red;
-}
+    .posts-form-title {
+      font-size: 18px;
+      font-weight: 500;
+    }
+  }
 
-.form-group {
-  margin: 10px 0;
-}
+  .posts-form {
+    .form-component {
+      width: 100%;
+      padding-bottom: 15px;
+    }
 
-.form-group input,
-.form-group textarea {
-  width: 100%;
-  padding: 5px;
-  border: none;
-  border-bottom: 1px solid #a020f0;
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 1rem;
-  background-color: transparent;
-}
-
-button[type="submit"] {
-  width: auto;
-  align-self: flex-end; 
-  padding: 10px;
-  background-color: #a020f0;
-  color: #ffffff;
-  border: none;
-  border-radius: 5px;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-button[type="submit"]:hover {
-  background-color: #9000e1;
-}
-
-.notification {
-  background-color: #4CAF50;
-  color: white;
-  padding: 15px;
-  text-align: center;
-  position: fixed;
-  top: 170px; 
-  left: 0; 
-  right: 0;
+    .posts-form-actions {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin-top: 30px;
+    }
+  }
 }

@@ -1,26 +1,30 @@
-<div class="post-create-form">
-    <div class="form-content">
-      <form [formGroup]="postCreationForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <label for="title">Title:</label>
-          <input type="text" id="title" formControlName="title">
-          <div *ngIf="postCreationForm.controls.title.invalid && postCreationForm.controls.title.touched" class="form-errors">
-            <p *ngIf="postCreationForm.controls.title.hasError('required')"> Title is required </p>
-            <p *ngIf="postCreationForm.controls.title.hasError('minlength')"> Title must be at least {{ minTitleLength }} characters </p>
-            <p *ngIf="postCreationForm.controls.title.hasError('maxlength')"> Title cannot exceed {{ maxTitleLength }} characters </p>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="content">Content:</label>
-          <textarea id="content" formControlName="content"></textarea>
-          <div *ngIf="postCreationForm.controls.content.invalid && postCreationForm.controls.content.touched" class="form-errors">
-            <p *ngIf="postCreationForm.controls.content.hasError('required')"> Post cannot be empty </p>
-            <p *ngIf="postCreationForm.controls.content.hasError('minlength')"> Content must be at least {{ minContentLength }} characters </p>
-          </div>
-        </div>
-        <button type="submit">Submit Post</button>
-        <div class="notification" *ngIf="showNotification">Post submitted succesfully!</div>
-      </form>
-    </div>
+<div class="posts-form-wrapper">
+  <div class="posts-form-header">
+    <span class="posts-form-title">Create post</span>
+    <button mat-icon-button color="primary" (click)="closeDialog()">
+      <mat-icon>close</mat-icon>
+    </button>
   </div>
-  
+  <form class="posts-form" [formGroup]="postCreationForm" (ngSubmit)="onSubmit()">
+    <mat-form-field class="form-component">
+      <mat-label>Title</mat-label>
+      <textarea matInput placeholder="My confession" formControlName="title"></textarea>
+      <mat-error *ngIf="postCreationForm.controls.title.hasError('required')"> Title is required </mat-error>
+      <mat-error *ngIf="postCreationForm.controls.title.hasError('minlength')"> Title must be at least {{ minTitleLength }} characters </mat-error>
+      <mat-error *ngIf="postCreationForm.controls.title.hasError('maxlength')"> Title cannot exceed {{ maxTitleLength }} characters </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-component">
+      <mat-label>Content</mat-label>
+      <textarea matInput placeholder="Tell smth about smth" formControlName="content"></textarea>
+      <mat-error *ngIf="postCreationForm.controls.content.hasError('required')"> Post cannot be empty </mat-error>
+      <mat-error *ngIf="postCreationForm.controls.content.hasError('minlength')"> Content must be at least {{ minContentLength }} characters </mat-error>
+    </mat-form-field>
+
+    <div class="posts-form-actions">
+      <button mat-raised-button color="primary" type="submit">
+        {{ "save" | uppercase }}
+      </button>
+    </div>
+  </form>
+</div>

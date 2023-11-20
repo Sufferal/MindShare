@@ -1,6 +1,10 @@
-<div>
-    <app-posts-list></app-posts-list>
-    <button (click)="showPostForm = true" class="post-form-init"> Create Post </button>
-    <button (click)="showPostForm = false" class="post-form-decline"> Close Post Form </button>
-    <app-posts-create-form *ngIf="showPostForm == true"></app-posts-create-form>
+<div class="feed-wrapper">
+  <div class="feed-header">
+    <h1>Posts feed</h1>
+    <div class="feed-actions-group">
+      <button mat-raised-button color="primary" (click)="openDialog()" class="post-form-init">Create Post</button>
+    </div>
+  </div>
+  <app-posts-list [posts]="posts"></app-posts-list>
+  <app-posts-create-form *ngIf="showPostForm"></app-posts-create-form>
 </div>

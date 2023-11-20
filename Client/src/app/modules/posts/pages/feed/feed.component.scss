@@ -1,53 +1,14 @@
-app-posts-create-form {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: white;
-    padding: 20px;
-    display: block;
-    z-index: 1000;
-  }
-  
+.feed-wrapper {
+  background-color: #F2DCA6;
 
-.post-form-init {
-    position: fixed;
-    top: 30px;
-    right: 20px;
-    width: 140px;
-    background-color: green;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    z-index: 1000;
-
-    font-size: 16px;
-    font-weight: bold;
+  .feed-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 10px;
   }
 
-  .post-form-init:hover {
-    background-color: darkgreen;
+  .feed-actions-group {
+    padding-right: 20px;
   }
-
-.post-form-decline {
-    position: fixed;
-    top: 80px;
-    right: 20px;
-    width: 140px;
-    background-color: orange;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    z-index: 1000;
-
-    font-size: 16px;
-    font-weight: bold;
-  }
-
-  .post-form-decline:hover {
-    background-color: darkorange;
-  }
+}
