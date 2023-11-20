@@ -27,6 +27,12 @@ export class PostsApiService {
   }
 
   updatePost(updatedPost: Post): any {
-    
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    return this.http.put<any>(`${this.url}/update`, updatedPost, httpOptions);
   }
 }

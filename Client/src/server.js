@@ -56,6 +56,10 @@ app.post('/create', (req, res) => {
   }
 });
 
+app.put('/update', (req, res) => {
+  console.log(req.body);
+})
+
 const port = 3000;
 
 http.createServer(app).listen(port, () => {
