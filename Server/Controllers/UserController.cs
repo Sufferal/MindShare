@@ -16,9 +16,10 @@ namespace Server.Controllers
         }
 
         [HttpGet]
+        [HttpGet]
         public async Task<IActionResult> GetUsers()
         {
-            var users = await _userService.GetUser();
+            var users = await _userService.GetUsers();
             return Ok(users);
         }
 

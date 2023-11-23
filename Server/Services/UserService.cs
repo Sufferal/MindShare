@@ -12,9 +12,9 @@ namespace Server.Services
             _userRepository = userRepository;
         }
 
-        public async Task<User> GetUser()
+        public async Task<IEnumerable<User>> GetUsers()
         {
-            return await _userRepository.GetUser();
+            return await _userRepository.GetUsers();
         }
 
         public async Task<User> GetUserById(int id)

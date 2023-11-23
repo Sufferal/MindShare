@@ -13,9 +13,10 @@ public class UserRepository
         _context = context;
     }
 
-    public async Task<User> GetUser()
+    public async Task<IEnumerable<User>> GetUsers()
     {
-        return await _context.Users.FirstOrDefaultAsync();
+        return await _context.Users.ToListAsync();
+        
     }
 
     public async Task<User> GetUserById(int id)
