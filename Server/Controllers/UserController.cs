@@ -1,27 +1,73 @@
 using Microsoft.AspNetCore.Mvc;
+using Server.Services;
+using Server.ViewModel;
 
-namespace Server.Controllers;
-
-[ApiController]
-[Route("api/user")]
-public class UserController : ControllerBase
+namespace Server.Controllers
 {
-    [HttpGet]
-    public IActionResult GetUsers()
+    [ApiController]
+    [Route("api/user")]
+    public class UserController : ControllerBase
     {
-        return Ok("You got all users");
-    }
+        private readonly UserService _userService;
 
-    [HttpGet("{id}")]
-    public IActionResult GetUserById(int id)
-    {
-        return Ok($"You got user with id {id}");
-    }
-    
-    [HttpGet("{id}/posts")]
-    public IActionResult GetPostsByUserId(int userId)
-    {
-        return Ok($"You got all posts by user with id {userId}");
-    }
+        public UserController(UserService userService)
+        {
+            _userService = userService;
+        }
 
+        [HttpGet]
+        public async Task<IActionResult> GetUsers()
+        {
+            var users = await _userService.GetUser();
+            return Ok(users);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetUserById(int id)
+        {
+            var user = await _userService.GetUserById(id);
+
+            if (user == null)
+            {
+                return NotFound($"User with id {id} not found");
+            }
+
+            return Ok(user);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateUser([FromBody] UserModel request)
+        {
+            // Assuming CreateUserRequest is a class representing the data needed to create a user
+            var user = await _userService.CreateUser(request.Username, request.Email, request.Password);
+            return Ok(user);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateUser(int id, [FromBody] UserModel request)
+        {
+            // Assuming UpdateUserRequest is a class representing the data needed to update a user
+            var user = await _userService.UpdateUser(id, request.Username, request.Email, request.Password);
+
+            if (user == null)
+            {
+                return NotFound($"User with id {id} not found");
+            }
+
+            return Ok(user);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUser(int id)
+        {
+            var deletedUser = await _userService.DeleteUser(id);
+
+            if (deletedUser == null)
+            {
+                return NotFound($"User with id {id} not found");
+            }
+
+            return Ok(deletedUser);
+        }
+    }
 }
