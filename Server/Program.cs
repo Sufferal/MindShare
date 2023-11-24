@@ -19,6 +19,8 @@ builder.Services.AddScoped<AuthRepository>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<UserRepository>();
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<PostRepository>();
+builder.Services.AddScoped<PostService>();
 
 var app = builder.Build();
 

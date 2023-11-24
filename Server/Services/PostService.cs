@@ -32,7 +32,7 @@ namespace Server.Services
             {
                 Title = model.Title,
                 Content = model.Content,
-                UserId = model.UserId
+                // UserId = model.UserId
             };
             return await _postRepository.AddPostAsync(post);
         }
@@ -43,7 +43,7 @@ namespace Server.Services
             {
                 Title = model.Title,
                 Content = model.Content,
-                UserId = model.UserId
+                // UserId = model.UserId
             };
             return await _postRepository.UpdatePostAsync(id, updatedPost);
         }

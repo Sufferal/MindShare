@@ -42,7 +42,7 @@ public class PostRepository
 
         existingPost.Title = updatedPost.Title;
         existingPost.Content = updatedPost.Content;
-        existingPost.UserId = updatedPost.UserId;
+        // existingPost.UserId = updatedPost.UserId;
         await _context.SaveChangesAsync();
         return existingPost;
     }

@@ -16,11 +16,11 @@ public class PostsController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult GetPosts()
+    public async Task<IActionResult> GetPosts()
     {
         try
         {
-            var posts = _postService.GetPosts();
+            var posts = await _postService.GetPosts();
             return Ok(posts);
         }
         catch (Exception ex)
@@ -30,11 +30,11 @@ public class PostsController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public IActionResult GetPostById(int id)
+    public async Task<IActionResult> GetPostById(int id)
     {
         try
         {
-            var post = _postService.GetPostById(id);
+            var post = await _postService.GetPostById(id);
             if (post == null)
             {
                 return NotFound($"Post with ID {id} not found");
@@ -48,11 +48,11 @@ public class PostsController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult AddPost([FromBody] PostModel model)
+    public async Task<IActionResult> AddPost([FromBody] PostModel model)
     {
         try
         {
-            var post = _postService.AddPost(model);
+            var post = await _postService.AddPost(model);
             return CreatedAtAction("GetPostById", new { id = post.Id }, post);
         }
         catch (Exception ex)
@@ -62,11 +62,11 @@ public class PostsController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public IActionResult UpdatePost([FromBody] PostModel model, int id)
+    public async Task<IActionResult> UpdatePost([FromBody] PostModel model, int id)
     {
         try
         {
-            var updatedPost = _postService.UpdatePost(id, model);
+            var updatedPost = await _postService.UpdatePost(id, model);
             if (updatedPost == null)
             {
                 return NotFound($"Post with ID {id} not found");
@@ -80,11 +80,11 @@ public class PostsController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public IActionResult DeletePost(int id)
+    public async Task<IActionResult> DeletePost(int id)
     {
         try
         {
-            var deletedPost = _postService.DeletePost(id);
+            var deletedPost = await _postService.DeletePost(id);
             if (deletedPost == null)
             {
                 return NotFound($"Post with ID {id} not found");
