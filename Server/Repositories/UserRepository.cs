@@ -24,20 +24,27 @@ public class UserRepository
         return await _context.Users.FindAsync(id);
     }
 
-    public async Task<User> PostUser(string username, string email, string password)
+    public async Task<User> PostUser(string firstName, string lastName, string dateOfBirth, string gender,
+                                     string username, string email, string password)
     {
-        var newUser = new User { Username = username, Email = email, Password = password };
+        var newUser = new User { FirstName = firstName, LastName = lastName, DateOfBirth = dateOfBirth, Gender = gender, 
+                                 Username = username, Email = email, Password = password };
         _context.Users.Add(newUser);
         await _context.SaveChangesAsync();
         return newUser;
     }
 
-    public async Task<User> PutUser(int id, string username, string email, string password)
+    public async Task<User> PutUser(int id, string firstName, string lastName, string dateOfBirth, string gender,
+                                     string username, string email, string password)
     {
         var existingUser = await _context.Users.FindAsync(id);
 
         if (existingUser != null)
         {
+            existingUser.FirstName = firstName;
+            existingUser.LastName = lastName;
+            existingUser.DateOfBirth = dateOfBirth;
+            existingUser.Gender = gender;
             existingUser.Username = username;
             existingUser.Email = email;
             existingUser.Password = password;

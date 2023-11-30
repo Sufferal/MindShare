@@ -22,14 +22,16 @@ namespace Server.Services
             return await _userRepository.GetUserById(id);
         }
 
-        public async Task<User> CreateUser(string username, string email, string password)
+        public async Task<User> CreateUser(string firstName, string lastName, string dateOfBirth, string gender,
+                                     string username, string email, string password)
         {
-            return await _userRepository.PostUser(username, email, password);
+            return await _userRepository.PostUser(firstName, lastName, dateOfBirth, gender, username, email, password);
         }
 
-        public async Task<User> UpdateUser(int id, string username, string email, string password)
+        public async Task<User> UpdateUser(int id, string firstName, string lastName, string dateOfBirth, string gender,
+                                     string username, string email, string password)
         {
-            return await _userRepository.PutUser(id, username, email, password);
+            return await _userRepository.PutUser(id, firstName, lastName, dateOfBirth, gender, username, email, password);
         }
 
         public async Task<User> DeleteUser(int id)

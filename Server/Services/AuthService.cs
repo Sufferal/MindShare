@@ -11,10 +11,15 @@ public class AuthService
         _userRepository = authRepository;
     }
 
-    public async Task<User> RegisterUser(string username, string password, string email)
+    public async Task<User> RegisterUser(string firstName, string lastName, string dateOfBirth, string gender, 
+                                        string username, string password, string email)
     {
         var user = new User
         {
+            FirstName = firstName,
+            LastName = lastName,
+            DateOfBirth = dateOfBirth,
+            Gender = gender,
             Username = username,
             Email = email,
             Password = password,
