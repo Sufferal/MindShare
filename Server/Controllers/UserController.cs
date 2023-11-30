@@ -40,7 +40,8 @@ namespace Server.Controllers
         public async Task<IActionResult> CreateUser([FromBody] UserModel request)
         {
             // Assuming CreateUserRequest is a class representing the data needed to create a user
-            var user = await _userService.CreateUser(request.Username, request.Email, request.Password);
+            var user = await _userService.CreateUser(request.FirstName, request.LastName, request.DateOfBirth, request.Gender,
+                                                     request.Username, request.Email, request.Password);
             return Ok(user);
         }
 
@@ -48,7 +49,8 @@ namespace Server.Controllers
         public async Task<IActionResult> UpdateUser(int id, [FromBody] UserModel request)
         {
             // Assuming UpdateUserRequest is a class representing the data needed to update a user
-            var user = await _userService.UpdateUser(id, request.Username, request.Email, request.Password);
+            var user = await _userService.UpdateUser(id, request.FirstName, request.LastName, request.DateOfBirth, request.Gender,
+                                                     request.Username, request.Email, request.Password);
 
             if (user == null)
             {

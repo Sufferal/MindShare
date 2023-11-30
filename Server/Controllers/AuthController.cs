@@ -20,11 +20,11 @@ public class AuthController : ControllerBase
         try
         {
             var user = await _authService.LoginUser(model.Username, model.Password);
-            return Ok($"Login successful for user with ID {user.Id}");
+            return Ok(new { status = 200, message = $"Login successful for user with ID {user.Id}", data = user });
         }
         catch (Exception ex)
         {
-            return BadRequest($"Login failed: {ex.Message}");
+            return Ok(new { status = 401, message = $"Login failed: {ex.Message}" });
         }
     }
 
@@ -33,12 +33,13 @@ public class AuthController : ControllerBase
     {
         try
         {
-            var user = await _authService.RegisterUser(model.Username, model.Password, model.Email);
-            return Ok($"User with name {user.Username} and email {user.Email} was successfully registered");
+            var user = await _authService.RegisterUser(model.FirstName, model.LastName, model.DateOfBirth, model.Gender,
+                                                       model.Username, model.Password, model.Email);
+            return Ok(new { status = 200, message = "User was successfully registered", data = user });
         }
         catch (Exception ex)
         {
-            return BadRequest($"Registration failed: {ex.Message}");
+            return Ok(new { status = 400, message = $"Registration failed: {ex.Message}" });
         }
     }
 }
