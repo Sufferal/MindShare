@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
            
   ngOnInit(): void {
     this.login = this.fb.group({
-      email: ['kevinhart@gmail.com', [Validators.required, Validators.email, Validators.pattern(this.emailRegex)]],
+      username: ['rock', Validators.required],
       password: ['qwerty', Validators.required],
     });
   }
@@ -37,11 +37,12 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     if (this.login.valid) {
       const loginData = { ...this.login.value };
-      this.userService.getUser(loginData).subscribe((res) => {
-        if(res) {
+      this.userService.getUser(loginData).subscribe((res: any) => {
+        if(res.status === 200) {
           this.navigateToRegister();
-        } else {
+        } else if (res.status === 401) {
           this.attemptLogin = true;
+          console.log(res);
         }
       });
     } else {
