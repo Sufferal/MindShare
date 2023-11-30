@@ -67,8 +67,12 @@ export class RegisterComponent implements OnInit {
         ...socialDetails,
       };
 
-      this.userService.createUser(user).subscribe(() => {  
-        this.navigateToLogin();
+      this.userService.createUser(user).subscribe((res: any) => {
+        if(res.status === 200) {
+          this.navigateToLogin();
+        }
+
+        console.log(res);
       });
     } else {
       this.socialDetails.markAllAsTouched();

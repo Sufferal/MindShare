@@ -6,13 +6,13 @@
   <form class="form" [formGroup]="this.login" (ngSubmit)="onSubmit()">
     <h1 class="form-title">MindShare</h1>
     <div class="form-group error">
-      <input class="form-control" type="email" id="email"
-      placeholder="email" formControlName="email">
-      <label class="form-label" for="email">Email</label>
-      <div *ngIf="this.login.controls['email'].invalid && 
-            (this.login.controls['email'].dirty || this.login.controls['email'].touched)" class="form-errors">
-        <p *ngIf="this.login.controls['email'].hasError('required')" class="error-msg">Email is required</p>
-        <p *ngIf="this.login.controls['email'].hasError('pattern')" class="error-msg">Email is invalid</p>
+      <input class="form-control" type="text" id="username"
+      placeholder="username" formControlName="username">
+      <label class="form-label" for="username">Username</label>
+      <div *ngIf="this.login.controls['username'].invalid && 
+            (this.login.controls['username'].dirty || this.login.controls['username'].touched)" class="form-errors">
+        <p *ngIf="this.login.controls['username'].hasError('required')" class="error-msg">Username is required</p>
+        <p *ngIf="this.login.controls['username'].hasError('pattern')" class="error-msg">Username is invalid</p>
       </div>
     </div>
     <div class="form-group">
