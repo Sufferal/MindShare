@@ -1,0 +1,37 @@
+.navbar {
+  margin-top: 3rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    a {
+      font-size: 4rem;
+    }
+  }
+
+  .links .link {
+    padding: 1rem;
+    border-radius: 3px;
+    font-size: 2rem;
+    margin-right: 5rem;
+    transition: all .2s ease-in-out;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &:hover {
+
+      color: #fff;
+      background-color: #000;
+    }
+  }
+}
