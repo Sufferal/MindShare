@@ -6,10 +6,12 @@ namespace Server.Services
     public class UserService
     {
         private readonly UserRepository _userRepository;
+        private readonly HashingService _hashingService;
 
         public UserService(UserRepository userRepository)
         {
             _userRepository = userRepository;
+            _hashingService = new HashingService();
         }
 
         public async Task<IEnumerable<User>> GetUsers()
@@ -25,13 +27,15 @@ namespace Server.Services
         public async Task<User> CreateUser(string firstName, string lastName, string dateOfBirth, string gender,
                                      string username, string email, string password)
         {
-            return await _userRepository.PostUser(firstName, lastName, dateOfBirth, gender, username, email, password);
+            var hashedPassword = _hashingService.HashPassword(password);
+            return await _userRepository.PostUser(firstName, lastName, dateOfBirth, gender, username, email, hashedPassword.PasswordHash, hashedPassword.PasswordSalt);
         }
 
         public async Task<User> UpdateUser(int id, string firstName, string lastName, string dateOfBirth, string gender,
                                      string username, string email, string password)
         {
-            return await _userRepository.PutUser(id, firstName, lastName, dateOfBirth, gender, username, email, password);
+            var hashedPassword = _hashingService.HashPassword(password);
+            return await _userRepository.PutUser(id, firstName, lastName, dateOfBirth, gender, username, email, hashedPassword.PasswordHash, hashedPassword.PasswordSalt);
         }
 
         public async Task<User> DeleteUser(int id)
