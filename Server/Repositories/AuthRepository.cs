@@ -20,14 +20,13 @@ public class AuthRepository
             throw new ApplicationException("Username is already taken.");
         }
         
-        // TODO: Hash before saving
         _context.Users.Add(user);
         await _context.SaveChangesAsync();
 
         return user;
     }
-
-    public async Task<User> LoginUser(string username, string password)
+    
+    public async Task<User> GetUserByUsername(string username)
     {
         var user = await _context.Users.SingleOrDefaultAsync(u => u.Username == username);
 
@@ -36,12 +35,7 @@ public class AuthRepository
             throw new ApplicationException("User not found.");
         }
 
-        // TODO: Add password salt and hashing
-        if (user.Password != password)
-        {
-            throw new ApplicationException("Invalid password.");
-        }
-
         return user;
     }
+    
 }

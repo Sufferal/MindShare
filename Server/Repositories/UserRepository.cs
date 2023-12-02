@@ -25,17 +25,17 @@ public class UserRepository
     }
 
     public async Task<User> PostUser(string firstName, string lastName, string dateOfBirth, string gender,
-                                     string username, string email, string password)
+                                     string username, string email, string password, string salt)
     {
         var newUser = new User { FirstName = firstName, LastName = lastName, DateOfBirth = dateOfBirth, Gender = gender, 
-                                 Username = username, Email = email, Password = password };
+                                 Username = username, Email = email, Password = password, Salt = salt};
         _context.Users.Add(newUser);
         await _context.SaveChangesAsync();
         return newUser;
     }
 
     public async Task<User> PutUser(int id, string firstName, string lastName, string dateOfBirth, string gender,
-                                     string username, string email, string password)
+                                     string username, string email, string password, string salt)
     {
         var existingUser = await _context.Users.FindAsync(id);
 
@@ -48,6 +48,7 @@ public class UserRepository
             existingUser.Username = username;
             existingUser.Email = email;
             existingUser.Password = password;
+            existingUser.Salt = salt;
 
             await _context.SaveChangesAsync();
         }
