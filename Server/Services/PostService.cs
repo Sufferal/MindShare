@@ -31,8 +31,8 @@ namespace Server.Services
             var post = new Post
             {
                 Title = model.Title,
+                Author = model.Author,
                 Content = model.Content,
-                // UserId = model.UserId
             };
             return await _postRepository.AddPostAsync(post);
         }
@@ -42,8 +42,8 @@ namespace Server.Services
             var updatedPost = new Post
             {
                 Title = model.Title,
-                Content = model.Content,
-                // UserId = model.UserId
+                Author = model.Author,
+                Content = model.Content
             };
             return await _postRepository.UpdatePostAsync(id, updatedPost);
         }
@@ -52,5 +52,43 @@ namespace Server.Services
         {
             return await _postRepository.DeletePostAsync(id);
         }
+        
+        public async Task<Comment> AddCommentToPost(int postId, CommentModel model)
+        {
+            var comment = new Comment()
+            {
+                Author = model.Author,
+                Content = model.Content,
+            };
+            return await _postRepository.AddCommentToPostAsync(postId, comment);
+        }
+
+        public async Task<Comment> UpdateCommentInPost(int postId, int commentId, CommentModel model)
+        {
+            var updatedComment = new Comment()
+            {
+                Author = model.Author,
+                Content = model.Content,
+            };
+            return await _postRepository.UpdateCommentInPostAsync(postId, commentId, updatedComment);
+        }
+
+        public async Task<Comment> DeleteCommentFromPost(int postId, int commentId)
+        {
+            return await _postRepository.DeleteCommentFromPostAsync(postId, commentId);
+        }
+        
+        public async Task<List<Comment>> GetCommentsForPost(int postId)
+        {
+            var post = await _postRepository.GetPostByIdAsync(postId);
+            if (post == null)
+            {
+                // Handle the case where the post is not found
+                return null;
+            }
+
+            return post.Comments;
+        }
+        
     }
 }

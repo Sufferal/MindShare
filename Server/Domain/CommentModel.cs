@@ -1,11 +1,10 @@
 namespace Server.Domain;
 
-public class Post
+public class Comment
 {
     public int Id { get; set; }
-    public string Title { get; set; }
     public string Author { get; set; }
     public string Content { get; set; }
     public DateTime CreatedAt { get; set; }
-    public List<Comment> Comments { get; set; } = new List<Comment>();
+    public int PostId { get; set; }
 }

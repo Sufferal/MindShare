@@ -42,7 +42,7 @@ public class PostRepository
 
         existingPost.Title = updatedPost.Title;
         existingPost.Content = updatedPost.Content;
-        // existingPost.UserId = updatedPost.UserId;
+        existingPost.Author = updatedPost.Author;
         await _context.SaveChangesAsync();
         return existingPost;
     }
@@ -57,4 +57,52 @@ public class PostRepository
         await _context.SaveChangesAsync();
         return post;
     }
+    
+    public async Task<Comment> AddCommentToPostAsync(int postId, Comment comment)
+    {
+        var post = await _context.Posts.Include(p => p.Comments).FirstOrDefaultAsync(p => p.Id == postId);
+        if (post == null)
+            return null;
+
+        comment.CreatedAt = DateTime.Now;
+        comment.PostId = postId;
+        post.Comments.Add(comment);
+        await _context.SaveChangesAsync();
+
+        return comment;
+    }
+
+    public async Task<Comment> UpdateCommentInPostAsync(int postId, int commentId, Comment updatedComment)
+    {
+        var post = await _context.Posts.Include(p => p.Comments).FirstOrDefaultAsync(p => p.Id == postId);
+        if (post == null)
+            return null;
+
+        var comment = post.Comments.FirstOrDefault(c => c.Id == commentId);
+        if (comment == null)
+            return null;
+
+        comment.Author = updatedComment.Author;
+        comment.Content = updatedComment.Content;
+        await _context.SaveChangesAsync();
+
+        return comment;
+    }
+
+    public async Task<Comment> DeleteCommentFromPostAsync(int postId, int commentId)
+    {
+        var post = await _context.Posts.Include(p => p.Comments).FirstOrDefaultAsync(p => p.Id == postId);
+        if (post == null)
+            return null;
+
+        var comment = post.Comments.FirstOrDefault(c => c.Id == commentId);
+        if (comment == null)
+            return null;
+
+        post.Comments.Remove(comment);
+        await _context.SaveChangesAsync();
+
+        return comment;
+    }
+    
 }

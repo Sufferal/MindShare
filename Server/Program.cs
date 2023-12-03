@@ -28,6 +28,8 @@ builder.Services.AddScoped<UserRepository>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<PostRepository>();
 builder.Services.AddScoped<PostService>();
+builder.Services.AddScoped<CommentRepository>();
+builder.Services.AddScoped<CommentService>();
 
 var app = builder.Build();
 
