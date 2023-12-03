@@ -1,2 +1,53 @@
 <app-navbar></app-navbar>
-<p>resource works!</p>
+
+<div class="container">
+  <div class="resources">
+    <h1 class="resources-title">Resources</h1>
+
+    <form>
+      <mat-form-field class="search">
+        <mat-label>Resource</mat-label>
+        <input
+          type="text"
+          placeholder="motivation"
+          aria-label="Resource"
+          matInput
+          [formControl]="myControl"
+          [matAutocomplete]="auto"
+        />
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option
+            *ngFor="let option of filteredOptions | async"
+            [value]="option"
+          >
+            {{ option }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>
+
+    <p class="no-results" *ngIf="(filteredOptions | async)?.length === 0
+           && myControl.value !== ''"> 
+      No resources found for <span>{{ myControl.value }} </span>
+    </p>
+
+    <div *ngFor="let r of resources" class="cards">
+      <div *ngIf="myControl.value === '' 
+              || (myControl.value && r.title.toLowerCase().includes(myControl.value.toLowerCase()))" 
+            class="card">
+        <div class="card-img">
+          <img src="{{ r.image }}" alt="{{ r.title }}" />
+        </div>
+        <div class="card-info">
+          <h2 class="card-title">{{ r.title }}</h2>
+          <p class="card-desc">{{ r.description }}</p>
+          <button class="card-btn">
+            <a>Learn more</a>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>
