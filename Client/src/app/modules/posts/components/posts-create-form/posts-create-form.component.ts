@@ -47,6 +47,7 @@ export class PostsCreateFormComponent {
         author: 'Author',
         content: this.postCreationForm.get('content')?.value as string,
         creationDate: new Date(),
+        image: null,
         comments: [],
       };
   

@@ -1,7 +1,16 @@
 .posts-item-wrapper {
   padding-bottom: 20px;
+  width: 100%;
   
   .posts-item {
+    padding: 4rem;
+
+    .post-img {
+      border: 3 px solid var(--form-secondary-color);
+      width: 500px;
+      height: auto;
+    }
+
     .posts-item-header {
       display: flex;
       justify-content: space-between;
@@ -27,6 +36,10 @@
         font-weight: 500;
         color: #a020f0;
       }
+    }
+
+    .comment-title{
+      font-size: 1.75rem;
     }
 
     .post-content {

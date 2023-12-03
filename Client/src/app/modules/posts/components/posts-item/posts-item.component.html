@@ -1,5 +1,6 @@
 <div class="posts-item-wrapper">
     <mat-card class="posts-item">
+        <img *ngIf="post.image" class="post-img" src="{{ post.image }}" alt="meme">
         <mat-card-header class="posts-item-header">
             <mat-card-title class="post-title">{{ post.title }}</mat-card-title>
             <mat-card-subtitle class="post-author">{{ post.author }}</mat-card-subtitle>
@@ -11,10 +12,13 @@
         <mat-card-content class="post-content">
             <p>{{ post.content }}</p>
         </mat-card-content>
+ 
+        <app-comments-create-form [post]="post"></app-comments-create-form>
+
+        <h3 class="comment-title">Comments</h3>
 
         <div *ngFor="let comment of post.comments">
             <app-comments-item [comment]="comment"></app-comments-item>
         </div>
     </mat-card>
-    <app-comments-create-form [post]="post"></app-comments-create-form>
 </div>

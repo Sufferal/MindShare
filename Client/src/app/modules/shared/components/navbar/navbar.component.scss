@@ -1,0 +1,47 @@
+.navbar {
+  margin: 3rem 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    a {
+      font-size: 4rem;
+    }
+  }
+
+  .links .link {
+    padding: 1rem;
+    border-radius: 3px;
+    font-size: 1.75rem;
+    margin-right: 5rem;
+    transition: all .25s ease-in-out;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &:hover {
+
+      color: #fff;
+      background-color: #000;
+    }
+
+    &-exit {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+
+      mat-icon {
+        margin-left: 1rem;
+      }
+    }
+  }
+}
