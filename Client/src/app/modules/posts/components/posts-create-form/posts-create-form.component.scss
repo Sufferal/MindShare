@@ -24,6 +24,11 @@
       justify-content: flex-end;
       align-items: center;
       margin-top: 30px;
+      
+      .btn {
+        color: #fff;
+        background-color: var(--form-secondary-color);
+      }
     }
   }
 }
