@@ -22,7 +22,7 @@
       <div *ngIf="this.attemptLogin || this.login.controls['password'].invalid &&
        (this.login.controls['password'].dirty || this.login.controls['password'].touched)" class="form-errors">
         <p *ngIf="this.login.controls['password'].hasError('required')" class="error-msg">Password is required</p>
-        <p *ngIf="this.attemptLogin && !this.login.controls['password'].hasError('required')" class="error-msg">Invalid email or password</p>
+        <p *ngIf="this.attemptLogin && !this.login.controls['password'].hasError('required')" class="error-msg">Invalid username or password</p>
       </div>
     </div>
     <p class="form-link-wrapper">
