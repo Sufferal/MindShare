@@ -12,7 +12,7 @@ const routes: Routes = [
     loadChildren: () => import('./modules').then(m => m.PostsModule),
   },
   {
-    path: 'user',
+    path: 'profile',
     loadChildren: () => import('./modules').then(m => m.ProfileModule),
   },
 ];

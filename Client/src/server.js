@@ -91,6 +91,19 @@ app.get("/data", (req, res) => {
   res.end(JSON.stringify(jsonData));
 });
 
+app.get("/user", (req, res) => {
+  res.setHeader("Content-Type", "application/json");
+  user_data = {
+    firstName: "Steven",
+    lastName: "Smith",
+    dateOfBirth: "27.05.1980",
+    gender: "Male",
+    username: "steve",
+    email: "steve@mail.com" 
+  }
+  res.end(JSON.stringify(user_data));
+});
+
 app.post("/create", (req, res) => {
   try {
     // Your POST request handling logic
