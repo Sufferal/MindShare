@@ -1,0 +1,41 @@
+@import url('./variables.scss');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--primary-font);
+  font-size: 1.6rem;
+  color: var(--default-primary-color);
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+button, 
+input {
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+
+
