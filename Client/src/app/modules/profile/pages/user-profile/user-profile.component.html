@@ -1,5 +1,6 @@
 <app-navbar></app-navbar>
 
-<app-profile [user]="user"></app-profile>
+<app-profile *ngIf="user" [user]="user"></app-profile>
+<app-profile-edit-form *ngIf="user" [user]="user"></app-profile-edit-form>
 
 <app-footer></app-footer>

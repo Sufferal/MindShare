@@ -13,6 +13,8 @@ export class UserProfileComponent {
   constructor(private profileService: ProfileService) {}
 
   ngOnInit(): void {    
-    this.profileService.getUser().subscribe((data: User) => this.user = data);
+    this.profileService.getUser().subscribe((data: User) => {
+      this.user = data
+    });
   }
 }

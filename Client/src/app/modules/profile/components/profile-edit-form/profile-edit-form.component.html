@@ -1,0 +1,54 @@
+<div class="profile-edit-form-wrapper">
+  <mat-card class="profile-edit-form">
+    <form [formGroup]="profileEditForm">
+      <div class="form-line">
+        <mat-form-field class="left-element">
+          <mat-label>First Name</mat-label>
+          <textarea matInput formControlName="firstName"></textarea>
+          <mat-error *ngIf="profileEditForm.controls.firstName.hasError('required')"> Field cannot be empty </mat-error>
+        </mat-form-field>
+    
+        <mat-form-field class="right-element">
+          <mat-label>Last Name</mat-label>
+          <textarea matInput formControlName="lastName"></textarea>
+          <mat-error *ngIf="profileEditForm.controls.lastName.hasError('required')"> Field cannot be empty </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-line">
+        <mat-form-field class="left-element">
+          <mat-label>Date of Birth</mat-label>
+          <textarea matInput formControlName="dateOfBirth"></textarea>
+          <mat-error *ngIf="profileEditForm.controls.dateOfBirth.hasError('required')"> Field cannot be empty </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="right-element">
+          <mat-label>Gender</mat-label>
+          <textarea matInput formControlName="gender"></textarea>
+          <mat-error *ngIf="profileEditForm.controls.gender.hasError('required')"> Field cannot be empty </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-line">
+        <mat-form-field class="left-element">
+          <mat-label>Username</mat-label>
+          <textarea matInput formControlName="username"></textarea>
+          <mat-error *ngIf="profileEditForm.controls.username.hasError('required')"> Field cannot be empty </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="right-element">
+          <mat-label>Email</mat-label>
+          <textarea matInput formControlName="email"></textarea>
+          <mat-error *ngIf="profileEditForm.controls.email.hasError('required')"> Field cannot be empty </mat-error>
+        </mat-form-field>
+      </div>
+  
+      <div class="profile-edit-form-actions">
+        <button class="btn" type="submit">
+          Save
+        </button>
+      </div>
+    </form>
+  </mat-card>
+  </div>
+  
