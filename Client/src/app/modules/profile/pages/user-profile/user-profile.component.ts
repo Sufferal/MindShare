@@ -9,6 +9,7 @@ import { User } from '../../models';
 })
 export class UserProfileComponent {
   user!: User;
+  showProfileEditForm: boolean = false;
 
   constructor(private profileService: ProfileService) {}
 
@@ -16,5 +17,9 @@ export class UserProfileComponent {
     this.profileService.getUser().subscribe((data: User) => {
       this.user = data
     });
+  }
+
+  toggleProfileEditForm() {
+    this.showProfileEditForm = !this.showProfileEditForm;
   }
 }

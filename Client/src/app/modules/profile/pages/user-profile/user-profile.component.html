@@ -1,6 +1,8 @@
 <app-navbar></app-navbar>
 
 <app-profile *ngIf="user" [user]="user"></app-profile>
-<app-profile-edit-form *ngIf="user" [user]="user"></app-profile-edit-form>
+<button (click)="toggleProfileEditForm()" class="btn"> Edit Profile </button>
+
+<app-profile-edit-form *ngIf="user && showProfileEditForm" [user]="user"></app-profile-edit-form>
 
 <app-footer></app-footer>
