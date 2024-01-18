@@ -9,7 +9,9 @@ import { MatListModule } from '@angular/material/list';
 import { ProfileEditFormComponent } from './components/profile-edit-form/profile-edit-form.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -21,11 +23,14 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
+    HttpClientModule,
+    FormsModule,
     ReactiveFormsModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
     MatListModule,
+    MatSnackBarModule,
     ProfileRoutingModule,
     SharedModule
   ]

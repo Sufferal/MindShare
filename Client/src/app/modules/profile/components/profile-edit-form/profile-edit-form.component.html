@@ -1,6 +1,6 @@
 <div class="profile-edit-form-wrapper">
   <mat-card class="profile-edit-form">
-    <form [formGroup]="profileEditForm">
+    <form [formGroup]="profileEditForm" (ngSubmit)="onSubmit()">
       <div class="form-line">
         <mat-form-field class="left-element">
           <mat-label>First Name</mat-label>

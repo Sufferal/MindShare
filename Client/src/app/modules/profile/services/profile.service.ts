@@ -15,4 +15,14 @@ export class ProfileService {
   getUser(): Observable<User> {
     return this.http.get<User>(`${this.url}/user`);
   }
+
+  updateUser(updatedUser: User): any {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    return this.http.put<any>(`${this.url}/user/update`, updatedUser, httpOptions);
+  }
 }
