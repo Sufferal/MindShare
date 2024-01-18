@@ -18,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     UserProfileComponent,
+<<<<<<< HEAD
     ProfileComponent,
     ProfileEditFormComponent
   ],
@@ -31,6 +32,14 @@ import { HttpClientModule } from '@angular/common/http';
     MatInputModule,
     MatListModule,
     MatSnackBarModule,
+=======
+    ProfileComponent
+  ],
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatListModule,
+>>>>>>> ac0ecd9316d877207b6cc759c319e3795acbefe8
     ProfileRoutingModule,
     SharedModule
   ]
