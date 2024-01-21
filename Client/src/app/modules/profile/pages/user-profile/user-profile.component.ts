@@ -9,10 +9,17 @@ import { User } from '../../models';
 })
 export class UserProfileComponent {
   user!: User;
+  showProfileEditForm: boolean = false;
 
   constructor(private profileService: ProfileService) {}
 
   ngOnInit(): void {    
-    this.profileService.getUser().subscribe((data: User) => this.user = data);
+    this.profileService.getUser().subscribe((data: User) => {
+      this.user = data
+    });
+  }
+
+  toggleProfileEditForm() {
+    this.showProfileEditForm = !this.showProfileEditForm;
   }
 }
