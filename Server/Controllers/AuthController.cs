@@ -42,4 +42,18 @@ public class AuthController : ControllerBase
             return Ok(new { status = 400, message = $"Registration failed: {ex.Message}" });
         }
     }
+    
+    [HttpPost("activate")]
+    public async Task<IActionResult> ActivateAccount([FromBody] ActivationModel model)
+    {
+        try
+        {
+            var user = await _authService.ActivateUser(model.UserId, model.ActivationToken);
+            return Ok(new { status = 200, message = "Account activated successfully"});
+        }
+        catch (Exception ex)
+        {
+            return Ok(new { status = 400, message = $"Activation failed: {ex.Message}" });
+        }
+    }
 }

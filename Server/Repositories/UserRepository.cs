@@ -25,10 +25,10 @@ public class UserRepository
     }
 
     public async Task<User> PostUser(string firstName, string lastName, string dateOfBirth, string gender,
-                                     string username, string email, string password, string salt)
+                                     string username, string email, string password, string salt, string activationToken)
     {
         var newUser = new User { FirstName = firstName, LastName = lastName, DateOfBirth = dateOfBirth, Gender = gender, 
-                                 Username = username, Email = email, Password = password, Salt = salt};
+                                 Username = username, Email = email, Password = password, Salt = salt, IsActivated = false, ActivationToken = activationToken};
         _context.Users.Add(newUser);
         await _context.SaveChangesAsync();
         return newUser;
@@ -54,6 +54,13 @@ public class UserRepository
         }
 
         return existingUser;
+    }
+
+    public async Task<User> UpdateUser(User user)
+    {
+        _context.Entry(user).State = EntityState.Modified;
+        await _context.SaveChangesAsync();
+        return user;
     }
 
     public async Task<User> DeleteUser(int id)
