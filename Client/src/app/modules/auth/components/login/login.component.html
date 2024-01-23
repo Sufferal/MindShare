@@ -22,12 +22,13 @@
       <div *ngIf="this.attemptLogin || this.login.controls['password'].invalid &&
        (this.login.controls['password'].dirty || this.login.controls['password'].touched)" class="form-errors">
         <p *ngIf="this.login.controls['password'].hasError('required')" class="error-msg">Password is required</p>
-        <p *ngIf="this.attemptLogin && !this.login.controls['password'].hasError('required')" class="error-msg">Invalid username or password</p>
+        <p *ngIf="!this.isLoginLocked && this.attemptLogin && !this.login.controls['password'].hasError('required')" class="error-msg">Invalid username or password</p>
       </div>
     </div>
     <p class="form-link-wrapper">
       Don't have an account yet? <a class="form-link" (click)="navigateToRegister()">Sign up</a>
     </p>
+    <p *ngIf="this.isLoginLocked" class="form-error-invalid error-msg">Too many failed login attempts. <br> Please try again later.</p>
     <button class="form-submit btn btn-form" type="submit" 
     [ngClass]="{'disabled': !this.login.valid && this.login.dirty}" 
     [disabled]="!this.login.valid && this.login.dirty">Log In</button>
