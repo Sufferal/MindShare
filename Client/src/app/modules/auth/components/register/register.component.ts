@@ -1,8 +1,22 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  AbstractControl,
+  ValidationErrors,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthApiService } from '../../services/auth-api.service';
 import { User } from '../../models/user.model';
+import {
+  alphabeticalValidator,
+  alphaNumericValidator,
+  dateRangeValidator,
+  emailValidator,
+  passwordMatcher,
+  strongPasswordValidator,
+} from '../../utils/register.validator';
 
 @Component({
   selector: 'app-register',
@@ -14,32 +28,78 @@ export class RegisterComponent implements OnInit {
   socialDetails!: FormGroup;
   personalStep: boolean = true;
   socialStep: boolean = false;
-  step: number = 1; 
+  step: number = 1;
+  isOtherSelected: boolean = false;
 
-  constructor(private userService: AuthApiService, 
-              private fb: FormBuilder, 
-              private router: Router) { }
-  
+  constructor(
+    private userService: AuthApiService,
+    private fb: FormBuilder,
+    private router: Router
+  ) {}
+
   ngOnInit(): void {
     this.personalDetails = this.fb.group({
-      firstName: ['Dwayne', Validators.required],
-      lastName: ['Johnson', Validators.required],
-      dateOfBirth: ['2000-01-01', Validators.required],
-      gender: ['male', Validators.required],
+      firstName: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(20),
+          alphabeticalValidator,
+        ],
+      ],
+      lastName: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(20),
+          alphabeticalValidator,
+        ],
+      ],
+      dateOfBirth: ['', [Validators.required, dateRangeValidator]],
+      gender: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(20),
+          alphabeticalValidator,
+        ],
+      ],
     });
 
-    this.socialDetails = this.fb.group({
-      username: ['rock', Validators.required],
-      email: ['rock@gmail.com', Validators.required],
-      password: ['qwerty', Validators.required],
-      confirmPassword: ['qwerty', Validators.required],
-    });
+    this.socialDetails = this.fb.group(
+      {
+        username: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(3),
+            Validators.maxLength(20),
+            alphaNumericValidator,
+          ],
+        ],
+        email: ['', [Validators.required, emailValidator]],
+        password: ['', [Validators.required, strongPasswordValidator]],
+        confirmPassword: ['', Validators.required],
+      },
+      { validators: passwordMatcher }
+    );
+
+    this.personalDetails.controls['gender'].valueChanges.subscribe(
+      (value: string) => {
+        this.isOtherSelected = value !== 'male' && value !== 'female';
+      }
+    );
   }
 
-  get personal() { return this.personalDetails.controls; }
+  get personal() {
+    return this.personalDetails.controls;
+  }
 
   next(isFormValid: boolean) {
-    if(!isFormValid) {
+    if (!isFormValid) {
       this.personalDetails.markAllAsTouched();
       return;
     }
@@ -48,10 +108,19 @@ export class RegisterComponent implements OnInit {
 
   prev() {
     this.step--;
-  } 
+  }
 
   navigateToLogin() {
     this.router.navigateByUrl('/login');
+  }
+
+  setOtherGender(): void {
+    this.isOtherSelected = true;
+  }
+
+  getFirstErrorMessage(errors: { [key: string]: any }): string {
+    const errorKeys = Object.keys(errors).filter((key) => key !== 'required');
+    return errors[errorKeys[0]];
   }
 
   onSubmit() {
@@ -67,8 +136,12 @@ export class RegisterComponent implements OnInit {
         ...socialDetails,
       };
 
-      this.userService.createUser(user).subscribe(() => {  
-        this.navigateToLogin();
+      this.userService.createUser(user).subscribe((res: any) => {
+        if (res.status === 200) {
+          this.navigateToLogin();
+        }
+
+        console.log(res);
       });
     } else {
       this.socialDetails.markAllAsTouched();
