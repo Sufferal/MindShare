@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Server.Data;
 
@@ -10,18 +11,51 @@ using Server.Data;
 namespace Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231203170912_PostFix")]
+    partial class PostFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.12");
+
+            modelBuilder.Entity("Server.Domain.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Author")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("PostId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PostId");
+
+                    b.ToTable("Comments");
+                });
 
             modelBuilder.Entity("Server.Domain.Post", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Author")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Content")
                         .IsRequired()
@@ -47,10 +81,6 @@ namespace Server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("ActivationToken")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("DateOfBirth")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -67,9 +97,6 @@ namespace Server.Migrations
                     b.Property<string>("Gender")
                         .IsRequired()
                         .HasColumnType("TEXT");
-
-                    b.Property<bool>("IsActivated")
-                        .HasColumnType("INTEGER");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -92,6 +119,20 @@ namespace Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Server.Domain.Comment", b =>
+                {
+                    b.HasOne("Server.Domain.Post", null)
+                        .WithMany("Comments")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Server.Domain.Post", b =>
+                {
+                    b.Navigation("Comments");
                 });
 #pragma warning restore 612, 618
         }

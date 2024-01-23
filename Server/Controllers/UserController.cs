@@ -14,8 +14,7 @@ namespace Server.Controllers
         {
             _userService = userService;
         }
-
-        [HttpGet]
+        
         [HttpGet]
         public async Task<IActionResult> GetUsers()
         {
@@ -39,16 +38,22 @@ namespace Server.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateUser([FromBody] UserModel request)
         {
-            // Assuming CreateUserRequest is a class representing the data needed to create a user
-            var user = await _userService.CreateUser(request.FirstName, request.LastName, request.DateOfBirth, request.Gender,
-                                                     request.Username, request.Email, request.Password);
-            return Ok(user);
+            try
+            {
+                var user = await _userService.CreateUser(request.FirstName, request.LastName, request.DateOfBirth,
+                    request.Gender,
+                    request.Username, request.Email, request.Password);
+                return Ok(new { status = 200 , message = "User was successfully added", data = user });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new {status = 400, message = $"Failed to add user: {ex.Message}"});
+            }
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUser(int id, [FromBody] UserModel request)
         {
-            // Assuming UpdateUserRequest is a class representing the data needed to update a user
             var user = await _userService.UpdateUser(id, request.FirstName, request.LastName, request.DateOfBirth, request.Gender,
                                                      request.Username, request.Email, request.Password);
 
