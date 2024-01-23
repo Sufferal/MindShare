@@ -235,3 +235,7 @@ _Pvt_Extensions
 Server/obj/
 Server/bin/
 *.run/
+
+*__pycache__/
+*venv/
+*emailsettings.json
