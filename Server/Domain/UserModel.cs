@@ -13,4 +13,8 @@ public class User
     public string Salt { get; set; }
     public bool IsActivated { get; set; }
     public string ActivationToken { get; set; }
+
+    public bool IsTwoFactorAuth { get; set; }
+
+    public string TwoStepAuthToken { get; set; }
 }

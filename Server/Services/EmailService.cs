@@ -13,8 +13,8 @@ public class EmailService
     {
         string smtpServer = "smtp.gmail.com";
         int smtpPort = 587;
-        var smtpUsername = "your@gmail.com";
-        var smtpPassword = "yourpassword";
+        var smtpUsername = "testsmtppython665@gmail.com";
+        var smtpPassword = "roilkipnzwgabnbc";
 
         var activationLink = $"http://localhost:8080/api/activate?UserId={user.Id}&ActivationToken={activationToken}";
 
@@ -38,6 +38,36 @@ public class EmailService
             mailMessage.To.Add(user.Email);
 
             await smtpClient.SendMailAsync(mailMessage);
+        }
+    }
+
+    public void SendTokenViaEmail(string userEmail, string token)
+    {
+        string smtpServer = "smtp.gmail.com";
+        int smtpPort = 587; 
+        string smtpUsername = "testsmtppython665@gmail.com";
+        string smtpPassword = "roilkipnzwgabnbc";
+
+        using (SmtpClient client = new SmtpClient(smtpServer, smtpPort))
+        {
+            client.UseDefaultCredentials = false;
+            client.Credentials = new NetworkCredential(smtpUsername, smtpPassword);
+            client.EnableSsl = true;
+
+            MailMessage message = new MailMessage();
+            message.From = new MailAddress(smtpUsername);
+            message.To.Add(userEmail);
+            message.Subject = "Two-Step Authentication Token";
+            message.Body = $"Your authentication token is: {token}";
+
+            try
+            {
+                client.Send(message);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException($"Error sending email: {ex.Message}");
+            }
         }
     }
 }

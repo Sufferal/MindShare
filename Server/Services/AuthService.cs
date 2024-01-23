@@ -9,6 +9,7 @@ public class AuthService
     private readonly HashingService _hashingService;
     private readonly AccountActivationService _accountActivationService;
     private readonly EmailService _emailService;
+    private readonly TwoStepAuthService _twoStepAuthService;
     public AuthService(AuthRepository authRepository, UserRepository userRepository)
     {
         _authRepository = authRepository;
@@ -16,6 +17,7 @@ public class AuthService
         _hashingService = new HashingService();
         _accountActivationService = new AccountActivationService();
         _emailService = new EmailService();
+        _twoStepAuthService = new TwoStepAuthService();
     }
 
     public async Task<User> RegisterUser(string firstName, string lastName, string dateOfBirth, string gender, 
@@ -35,7 +37,8 @@ public class AuthService
             Password = hashedPassword.PasswordHash,
             Salt = hashedPassword.PasswordSalt,
             IsActivated = false,
-            ActivationToken = activationToken
+            ActivationToken = activationToken,
+            TwoStepAuthToken = "null"
         };
         
         var registeredUser = await _authRepository.RegisterUser(user);
@@ -48,16 +51,23 @@ public class AuthService
     public async Task<User> LoginUser(string username, string password)
     {
         var user = await _authRepository.GetUserByUsername(username);
-        
+
         if (user.IsActivated == false)
         {
             throw new ApplicationException("Account not activated.");
         }
-        
+
         if (!_hashingService.VerifyPassword(password, user.Password, user.Salt))
         {
             throw new ApplicationException("Invalid password.");
         }
+
+        var token = _twoStepAuthService.GenerateUniqueToken();
+
+        user.TwoStepAuthToken = token;
+        await _userRepository.UpdateUser(user);
+
+        _emailService.SendTokenViaEmail(user.Email, token);
 
         return user;
     }
@@ -80,4 +90,15 @@ public class AuthService
         return await _userRepository.UpdateUser(user);
     }
 
+    public async Task<bool> ValidateTwoStepAuthToken(string username, string providedToken)
+    {
+        var user = await _authRepository.GetUserByUsername(username);
+
+        if (user == null)
+        {
+            throw new ApplicationException("User not found.");
+        }
+
+        return string.Equals(user.TwoStepAuthToken, providedToken, StringComparison.Ordinal);
+    }
 }
