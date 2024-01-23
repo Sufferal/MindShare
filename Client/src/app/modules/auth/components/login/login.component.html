@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="login-img">
+    <img src="assets/img/login.png" alt="login">
+  </div>
+  
+  <form class="form" [formGroup]="this.login" (ngSubmit)="onSubmit()">
+    <h1 class="form-title">MindShare</h1>
+    <div class="form-group error">
+      <input class="form-control" type="text" id="username"
+      placeholder="username" formControlName="username">
+      <label class="form-label" for="username">Username</label>
+      <div *ngIf="this.login.controls['username'].invalid && 
+            (this.login.controls['username'].dirty || this.login.controls['username'].touched)" class="form-errors">
+        <p *ngIf="this.login.controls['username'].hasError('required')" class="error-msg">Username is required</p>
+        <p *ngIf="this.login.controls['username'].hasError('pattern')" class="error-msg">Username is invalid</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <input class="form-control" type="password" id="password" 
+      placeholder="password" formControlName="password">
+      <label class="form-label" for="password">Password</label>
+      <div *ngIf="this.attemptLogin || this.login.controls['password'].invalid &&
+       (this.login.controls['password'].dirty || this.login.controls['password'].touched)" class="form-errors">
+        <p *ngIf="this.login.controls['password'].hasError('required')" class="error-msg">Password is required</p>
+        <p *ngIf="!this.isLoginLocked && this.attemptLogin && !this.login.controls['password'].hasError('required')" class="error-msg">Invalid username or password</p>
+      </div>
+    </div>
+    <p class="form-link-wrapper">
+      Don't have an account yet? <a class="form-link" (click)="navigateToRegister()">Sign up</a>
+    </p>
+    <p *ngIf="this.isLoginLocked" class="form-error-invalid error-msg">Too many failed login attempts. <br> Please try again later.</p>
+    <button class="form-submit btn btn-form" type="submit" 
+    [ngClass]="{'disabled': !this.login.valid && this.login.dirty}" 
+    [disabled]="!this.login.valid && this.login.dirty">Log In</button>
+  </form>
+</div>
