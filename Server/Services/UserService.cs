@@ -31,6 +31,9 @@ namespace Server.Services
         {
             var generateToken = _accountActivationService.GenerateActivationToken();
             var hashedPassword = _hashingService.HashPassword(password);
+            
+            
+            
             return await _userRepository.PostUser(firstName, lastName, dateOfBirth, gender, username, email, hashedPassword.PasswordHash, hashedPassword.PasswordSalt, generateToken);
         }
 

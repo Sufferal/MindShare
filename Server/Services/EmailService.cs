@@ -2,20 +2,21 @@ using Server.Domain;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 
 namespace Server.Services;
 
 public class EmailService
 {
 
-    private async Task SendActivationEmail(User user, string activationToken)
+    public async Task SendActivationEmail(User user, string activationToken)
     {
         string smtpServer = "smtp.gmail.com";
         int smtpPort = 587;
-        string smtpUsername = "your-gmail-account@gmail.com";
-        string smtpPassword = "your-gmail-password";
+        var smtpUsername = "your@gmail.com";
+        var smtpPassword = "yourpassword";
 
-        var activationLink = $"http://localhost:8080/api/activate?userId={user.Id}&token={activationToken}";
+        var activationLink = $"http://localhost:8080/api/activate?UserId={user.Id}&ActivationToken={activationToken}";
 
         using (SmtpClient smtpClient = new SmtpClient(smtpServer, smtpPort))
         {

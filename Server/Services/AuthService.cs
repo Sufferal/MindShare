@@ -8,12 +8,14 @@ public class AuthService
     private readonly UserRepository _userRepository;
     private readonly HashingService _hashingService;
     private readonly AccountActivationService _accountActivationService;
+    private readonly EmailService _emailService;
     public AuthService(AuthRepository authRepository, UserRepository userRepository)
     {
         _authRepository = authRepository;
         _userRepository = userRepository;
         _hashingService = new HashingService();
         _accountActivationService = new AccountActivationService();
+        _emailService = new EmailService();
     }
 
     public async Task<User> RegisterUser(string firstName, string lastName, string dateOfBirth, string gender, 
@@ -36,15 +38,22 @@ public class AuthService
             ActivationToken = activationToken
         };
         
-        // await SendActivationEmail(user, activationToken);
+        var registeredUser = await _authRepository.RegisterUser(user);
+        
+        await _emailService.SendActivationEmail(registeredUser, activationToken);
 
-        return await _authRepository.RegisterUser(user);
+        return registeredUser;
     }
 
     public async Task<User> LoginUser(string username, string password)
     {
         var user = await _authRepository.GetUserByUsername(username);
-
+        
+        if (user.IsActivated == false)
+        {
+            throw new ApplicationException("Account not activated.");
+        }
+        
         if (!_hashingService.VerifyPassword(password, user.Password, user.Salt))
         {
             throw new ApplicationException("Invalid password.");

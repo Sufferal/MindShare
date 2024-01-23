@@ -20,6 +20,11 @@ public class AuthRepository
             throw new ApplicationException("Username is already taken.");
         }
         
+        if (await _context.Users.AnyAsync(u => u.Email == user.Email))
+        {
+            throw new ApplicationException("Email is already taken.");
+        }
+        
         _context.Users.Add(user);
         await _context.SaveChangesAsync();
 

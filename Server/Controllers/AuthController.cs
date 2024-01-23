@@ -43,13 +43,13 @@ public class AuthController : ControllerBase
         }
     }
     
-    [HttpPost("activate")]
-    public async Task<IActionResult> ActivateAccount([FromBody] ActivationModel model)
+    [HttpGet("activate")]
+    public async Task<IActionResult> ActivateAccount([FromQuery] ActivationModel model)
     {
         try
         {
             var user = await _authService.ActivateUser(model.UserId, model.ActivationToken);
-            return Ok(new { status = 200, message = "Account activated successfully"});
+            return Ok(new { status = 200, message = "Account activated successfully" });
         }
         catch (Exception ex)
         {

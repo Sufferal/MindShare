@@ -29,8 +29,20 @@ public class UserRepository
     {
         var newUser = new User { FirstName = firstName, LastName = lastName, DateOfBirth = dateOfBirth, Gender = gender, 
                                  Username = username, Email = email, Password = password, Salt = salt, IsActivated = false, ActivationToken = activationToken};
+        
+        if (await _context.Users.AnyAsync(u => u.Username == newUser.Username))
+        {
+            throw new ApplicationException("Username is already taken.");
+        }
+        
+        if (await _context.Users.AnyAsync(u => u.Email == newUser.Email))
+        {
+            throw new ApplicationException("Email is already taken.");
+        }
+        
         _context.Users.Add(newUser);
         await _context.SaveChangesAsync();
+        
         return newUser;
     }
 
