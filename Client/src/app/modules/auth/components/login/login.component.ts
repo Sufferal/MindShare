@@ -42,8 +42,8 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  navigateToRegister() {
-    this.router.navigateByUrl('/register');
+  navigateToResources() {
+    this.router.navigateByUrl('/resources');
   }
   
   onSubmit() {
@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
       const loginData = { ...this.login.value };
       this.userService.getUser(loginData).subscribe((res: any) => {
         if(res.status === 200) {
-          this.navigateToRegister();
+          this.navigateToResources();
         } else if (res.status === 401) {
           this.failedAttempts++;
           this.attemptLogin = true;

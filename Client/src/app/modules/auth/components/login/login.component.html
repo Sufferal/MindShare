@@ -1,3 +1,4 @@
+<div class="wrapper">
 <div class="container">
   <div class="login-img">
     <img src="assets/img/login.png" alt="login">
@@ -26,11 +27,12 @@
       </div>
     </div>
     <p class="form-link-wrapper">
-      Don't have an account yet? <a class="form-link" (click)="navigateToRegister()">Sign up</a>
+      Don't have an account yet? <a class="form-link" (click)="navigateToResources()">Sign up</a>
     </p>
     <p *ngIf="this.isLoginLocked" class="form-error-invalid error-msg">Too many failed login attempts. <br> Please try again later.</p>
     <button class="form-submit btn btn-form" type="submit" 
     [ngClass]="{'disabled': !this.login.valid && this.login.dirty}" 
     [disabled]="!this.login.valid && this.login.dirty">Log In</button>
   </form>
+</div>
 </div>
