@@ -27,7 +27,7 @@
       </div>
     </div>
     <p class="form-link-wrapper">
-      Don't have an account yet? <a class="form-link" (click)="navigateToResources()">Sign up</a>
+      Don't have an account yet? <a class="form-link" (click)="this.navigateToRegister()">Sign up</a>
     </p>
     <p *ngIf="this.isLoginLocked" class="form-error-invalid error-msg">Too many failed login attempts. <br> Please try again later.</p>
     <button class="form-submit btn btn-form" type="submit" 

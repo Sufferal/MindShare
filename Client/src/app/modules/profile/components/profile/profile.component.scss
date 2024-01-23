@@ -1,0 +1,12 @@
+.user-profile-wrapper {
+    max-width: 80%;
+    margin: 3% auto;
+    display: flex;
+    flex-direction: column;
+    
+    .user-profile-line {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+  

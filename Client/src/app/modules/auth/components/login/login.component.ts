@@ -43,9 +43,15 @@ export class LoginComponent implements OnInit {
   }
 
   navigateToResources() {
-    this.router.navigateByUrl('/resources');
+    setTimeout(() => {
+      this.router.navigateByUrl('/posts');
+    }, 1000);
   }
   
+  navigateToRegister() {
+    this.router.navigateByUrl('/register');
+  }
+
   onSubmit() {
     if(this.isLoginLocked) {
       console.log('Login is locked. Too many failed attempts.');

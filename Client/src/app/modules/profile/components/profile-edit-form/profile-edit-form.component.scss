@@ -1,0 +1,33 @@
+.profile-edit-form-wrapper {
+    max-width: 80%;
+    margin-left: 10%;
+    margin-bottom: 3%;
+
+    .profile-edit-form {
+        display: flex;
+        flex-direction: column;
+        padding: 2%;
+
+        .form-line {
+            display: flex;
+            flex-direction: line;
+            padding-bottom: 1%;
+
+            .left-element {
+                width: 30%;
+            }
+
+            .right-element {
+                width: 30%;
+                margin-left: 21%;
+            }
+        }
+
+        .btn {
+            width: 10%;
+            padding-top: 1%;
+            padding-bottom: 1%;
+            margin-left: 87%;
+        }
+    }
+}
