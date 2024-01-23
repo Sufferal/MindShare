@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class PostsApiService {
-  url: string = environment.apiUrl;
+  url: string = environment.apiUrlDiff;
 
   constructor(private http: HttpClient) { }
   

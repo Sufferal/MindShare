@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PostsModule, ProfileModule } from './modules';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthModule } from './modules/auth/auth.module';
+import { ResourceModule } from './modules/resource/resource.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -17,7 +19,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     PostsModule,
     ProfileModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AuthModule,
+    ResourceModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

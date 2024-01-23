@@ -15,10 +15,20 @@ const routes: Routes = [
     path: 'profile',
     loadChildren: () => import('./modules').then(m => m.ProfileModule),
   },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./modules/auth/auth.module').then((m) => m.AuthModule),
+  },
+  {
+    path: 'resources',
+    loadChildren: () =>
+      import('./modules/resource/resource.module').then((m) => m.ResourceModule),
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

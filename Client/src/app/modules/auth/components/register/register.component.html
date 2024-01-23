@@ -1,0 +1,146 @@
+<main class="main">
+  <div class="container">
+    <div class="register-info">
+      <h1 class="register-title unselectable">MindShare</h1>
+      <p class="register-desc">Your safe space for mental health support and inspiration.</p>
+    </div>
+    
+    <form *ngIf="step === 1" class="form" [formGroup]="personalDetails">
+      <div class="form-group">
+        <div *ngIf="personalDetails.controls['firstName'].invalid
+          && (personalDetails.controls['firstName'].dirty || personalDetails.controls['firstName'].touched)" class="form-errors">
+          <p *ngIf="personalDetails.controls['firstName'].hasError('required')" class="error-msg">First name is required</p>
+          <p *ngIf="personalDetails.controls['firstName'].hasError('minlength')" class="error-msg">First name is too short</p>
+          <p *ngIf="personalDetails.controls['firstName'].hasError('maxlength')" class="error-msg">First name is too long</p>
+          <p *ngIf="personalDetails.controls['firstName'].hasError('alphabetical')" class="error-msg">First name must contain only letters (no spaces)</p>
+        </div>  
+        <label for="fname" class="visually-hidden">First name</label>
+        <input class="form-control" type="text" id="fname" placeholder="First name*"
+          formControlName="firstName">
+      </div>
+      <div class="form-group">
+        <div *ngIf="personalDetails.controls['lastName'].invalid
+          && (personalDetails.controls['lastName'].dirty || personalDetails.controls['lastName'].touched)" class="form-errors">
+          <p *ngIf="personalDetails.controls['lastName'].hasError('required')" class="error-msg">Last name is required</p>
+          <p *ngIf="personalDetails.controls['lastName'].hasError('minlength')" class="error-msg">Last name is too short</p>
+          <p *ngIf="personalDetails.controls['lastName'].hasError('maxlength')" class="error-msg">Last name is too long</p>
+          <p *ngIf="personalDetails.controls['lastName'].hasError('alphabetical')" class="error-msg">Last name must contain only letters (no spaces)</p>
+        </div>
+        <label for="lname" class="visually-hidden">Last name</label>
+        <input class="form-control" type="text" id="lname" placeholder="Last name*"
+          formControlName="lastName">
+      </div>
+      <div class="form-group">
+        <div *ngIf="personalDetails.controls['dateOfBirth'].invalid
+          && (personalDetails.controls['dateOfBirth'].dirty || personalDetails.controls['dateOfBirth'].touched)" class="form-errors">
+          <p *ngIf="personalDetails.controls['dateOfBirth'].hasError('required')" class="error-msg">Date of birth is required</p>
+          <p *ngIf="personalDetails.controls['dateOfBirth'].hasError('dateRange')" class="error-msg">
+            Date must be between 1950 and 2009
+          </p>
+        </div>
+        <label for="dob" class="visually-hidden">Date of Birth</label>
+        <input class="form-control" type="date" id="dob" placeholder="Date"
+          formControlName="dateOfBirth">
+      </div>
+      <div [ngClass]="{'highlight': personalDetails.value.gender !== ''}" class="form-group form-group-gender">
+        <div *ngIf="personalDetails.controls['gender'].invalid && personalDetails.controls['gender'].touched" class="form-errors">
+          <p *ngIf="personalDetails.controls['gender'].hasError('required')" class="error-msg">Gender is required</p>
+          <p *ngIf="personalDetails.controls['gender'].hasError('minlength')" class="error-msg">Gender is too short</p>
+          <p *ngIf="personalDetails.controls['gender'].hasError('maxlength')" class="error-msg">Gender is too long</p>
+          <p *ngIf="personalDetails.controls['gender'].hasError('alphabetical')" class="error-msg">Gender must contain only letters (no spaces)</p>
+        </div>
+        
+        <label for="male">Gender:</label>
+        <input class="form-control" type="radio" id="male" name="gender" value="male"
+        formControlName="gender">
+        <label [ngClass]="{'highlight': personalDetails.value.gender === 'male'}" for="male">Male</label>
+        
+        <input class="form-control" type="radio" id="female" name="gender" value="female"
+        formControlName="gender">
+        <label [ngClass]="{'highlight': personalDetails.value.gender === 'female'}" for="female">Female</label>
+        
+        <input class="form-control" type="radio" id="other" name="gender" value="other"
+        formControlName="gender"
+        (change)="setOtherGender()">
+        <label [ngClass]="{'highlight': isOtherSelected}" for="other">Other</label>
+
+        <div class="other" *ngIf="isOtherSelected">
+          <input  
+          class="form-control form-control-gender" 
+          type="text" name="other" id="otherInput" placeholder="Gender*"
+          formControlName="gender"
+          >
+        </div>
+      </div>
+      <p class="form-link-wrapper">
+        Already have an account? <a class="form-link" (click)="navigateToLogin()">Log in</a>
+      </p>
+      <div class="form-btn-wrapper">
+        <button  
+        class="btn btn-form form-btn form-btn-next" type="button" (click)="next(personalDetails.dirty)"
+        [ngClass]="{'disabled': personalDetails.invalid && personalDetails.dirty}" 
+        [disabled]="personalDetails.invalid && personalDetails.dirty">Next 
+          <mat-icon>chevron_right</mat-icon>
+        </button>
+      </div>
+    </form>
+
+    <form *ngIf="step === 2" class="form" (ngSubmit)="onSubmit()" [formGroup]="socialDetails">
+        <div class="form-group">
+          <div *ngIf="socialDetails.controls['username'].invalid
+            && (socialDetails.controls['username'].dirty || socialDetails.controls['username'].touched)" class="form-errors">
+            <p *ngIf="socialDetails.controls['username'].hasError('required')" class="error-msg">Username is required</p>
+            <p *ngIf="socialDetails.controls['username'].hasError('minlength')" class="error-msg">Username is too short</p>
+            <p *ngIf="socialDetails.controls['username'].hasError('maxlength')" class="error-msg">Username is too long</p>
+            <p *ngIf="socialDetails.controls['username'].hasError('alphanumeric')" class="error-msg">Username can contain only letters, numbers and _</p>
+          </div>
+          <label for="username" class="visually-hidden">Username</label>
+          <input class="form-control" type="text" id="username" placeholder="Username*"
+            formControlName="username">
+        </div>
+        <div class="form-group">
+          <div *ngIf="socialDetails.controls['email'].invalid
+            && (socialDetails.controls['email'].dirty || socialDetails.controls['email'].touched)" class="form-errors">
+            <p *ngIf="socialDetails.controls['email'].hasError('required')" class="error-msg">Email is required</p>
+            <p *ngIf="socialDetails.controls['email'].hasError('invalidEmail')" class="error-msg">Email is invalid</p>
+          </div>
+          <label for="email" class="visually-hidden">Email</label>
+          <input class="form-control" type="email" id="email" placeholder="Email*"
+            formControlName="email">
+        </div>
+        <div class="form-group">
+          <div *ngIf="socialDetails.controls['password'].invalid
+            && (socialDetails.controls['password'].dirty || socialDetails.controls['password'].touched)" class="form-errors">
+            <p *ngIf="socialDetails.controls['password'].hasError('required')" class="error-msg">Password is required</p>
+            <div *ngIf="!socialDetails.controls['password'].hasError('required') 
+              && socialDetails.get('password')?.errors as errors">
+              <p class="error-msg">{{getFirstErrorMessage(errors)}}</p>
+            </div>
+          </div>
+          <label class="password-label" for="password">Password</label>
+          <input class="form-control form-control-password" type="password" id="password" 
+            formControlName="password">
+        </div>
+        <div class="form-group">
+          <div *ngIf="socialDetails.controls['password'].dirty && socialDetails.controls['confirmPassword'].dirty" class="form-errors">
+            <p *ngIf="socialDetails.hasError('passwordMismatch')" class="error-msg">Passwords do not match</p>
+          </div>
+          <label class="password-label" for="confirmPassword">Confirm password</label>
+          <input class="form-control form-control-password" type="password" id="confirmPassword" 
+            formControlName="confirmPassword">
+        </div>
+        <div class="form-btn-wrapper form-btn-wrapper-password">
+          <button class="btn btn-form form-btn form-btn-prev" type="button" (click)="prev()">
+            <mat-icon>chevron_left</mat-icon>
+            Back
+          </button>
+          <button class="btn btn-form form-btn form-btn-next" type="submit"
+          [ngClass]="{'disabled': socialDetails.invalid && socialDetails.dirty}" 
+          [disabled]="socialDetails.invalid && socialDetails.dirty"
+          >Submit </button>
+        </div>
+    </form>
+  </div>
+</main>
+
+

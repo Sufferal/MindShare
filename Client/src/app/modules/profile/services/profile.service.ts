@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ProfileService {
-  url: string = environment.apiUrl;
+  url: string = environment.apiUrlDiff;
 
   constructor(private http: HttpClient) { }
 

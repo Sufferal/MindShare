@@ -9,6 +9,12 @@ import { Router } from '@angular/router';
 export class NavbarComponent {
   constructor(private router: Router) {}
 
+  navigateToLogin() {
+    setTimeout(() => {
+      this.router.navigateByUrl('/login');
+    }, 1000);
+  }
+
   navigateToUrl(url: string) {
     this.router.navigateByUrl(url);
   }

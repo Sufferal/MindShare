@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "firstName": "Kevin",
+    "lastName": "Hart",
+    "dateOfBirth": "1990-01-01",
+    "gender": "male",
+    "username": "Kevin_Best",
+    "email": "kevinhart@gmail.com",
+    "password": "qwerty"
+  },
+  {
+    "id": 2,
+    "firstName": "Dwayne",
+    "lastName": "Johnson",
+    "dateOfBirth": "1990-01-01",
+    "gender": "male",
+    "username": "Rock",
+    "email": "rocks@gmail.com",
+    "password": "123456"
+  },
+  {
+    "id": 3,
+    "firstName": "Ariana",
+    "lastName": "Grande",
+    "dateOfBirth": "1990-01-01",
+    "gender": "female",
+    "username": "Queen",
+    "email": "queen@gmail.com",
+    "password": "iamthebest"
+  }
+]

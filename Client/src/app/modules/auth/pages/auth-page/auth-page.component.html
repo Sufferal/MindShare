@@ -1,0 +1,7 @@
+<div *ngIf="!showLoginComponent">
+  <app-login (showLoginEvent)="toggleLogin()"></app-login>
+</div>
+<div *ngIf="showLoginComponent">
+  <app-register (showLoginEvent)="toggleLogin()"></app-register>
+</div>
+
