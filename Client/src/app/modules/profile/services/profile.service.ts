@@ -12,11 +12,11 @@ export class ProfileService {
 
   constructor(private http: HttpClient) { }
 
-  getUser(): Observable<User> {
-    return this.http.get<User>(`${this.url}/user`);
+  getUser(): Observable<any> {
+    return this.http.get<any>(`${this.url}/user`);
   }
 
-  updateUser(updatedUser: User): any {
+  updateUser(updatedUser: any): any {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'

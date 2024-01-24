@@ -4,12 +4,21 @@
       <a (click)="navigateToUrl('/posts')">MindShare</a>
     </h2>
     <div class="links">
-      <a class="link" (click)="navigateToUrl('/posts')">Posts</a>
-      <a class="link" (click)="navigateToUrl('/resources')">Resources</a>
-      <a class="link" (click)="navigateToUrl('/profile')">User profile</a>
+      <a class="link" (click)="navigateToUrl('/posts')">
+        <mat-icon>explore</mat-icon>
+        Posts
+      </a>
+      <a class="link" (click)="navigateToUrl('/resources')">
+        <mat-icon>collections_bookmark</mat-icon>
+        Resources
+      </a>
+      <a class="link" (click)="navigateToUrl('/profile')">
+        <mat-icon>account_circle</mat-icon>
+        User profile
+      </a>
       <a class="link link-exit" (click)="navigateToLogin()">
-        Logout
         <mat-icon>exit_to_app</mat-icon>
+        Logout
       </a>
     </div>
   </div>
