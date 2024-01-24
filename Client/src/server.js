@@ -3,6 +3,7 @@ const cors = require("cors");
 const express = require("express");
 const bodyParser = require("body-parser");
 
+let currentUser = {};
 const jsonData = [
   {
     title: "Post 1",
@@ -101,7 +102,7 @@ app.get("/user", (req, res) => {
     username: "steve",
     email: "steve@mail.com" 
   }
-  res.end(JSON.stringify(user_data));
+  res.end(JSON.stringify(currentUser));
 });
 
 app.post("/create", (req, res) => {
@@ -111,6 +112,18 @@ app.post("/create", (req, res) => {
     let data = req.body;
     res.send({ ack: "OK" });
     jsonData.push(data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("An error occurred");
+  }
+});
+
+app.post("/user/create", (req, res) => {
+  try {
+    // Your POST request handling logic
+    res.setHeader("Content-Type", "application/json");
+    currentUser = req.body;
+    res.send({ ack: "OK" });
   } catch (error) {
     console.error(error);
     res.status(500).send("An error occurred");
