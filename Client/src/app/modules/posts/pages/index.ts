@@ -1,0 +1,1 @@
+export { FeedComponent } from './feed/feed.component';

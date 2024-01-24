@@ -17,31 +17,33 @@
     }
   }
 
+  .links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   .links .link {
     padding: 1rem;
     border-radius: 3px;
     font-size: 1.75rem;
-    margin-right: 5rem;
+    margin-right: 3rem;
     transition: all .25s ease-in-out;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    mat-icon {
+      margin-right: 0.5rem;
+    }
 
     &:last-child {
       margin-right: 0;
     }
 
     &:hover {
-
       color: #fff;
       background-color: #000;
-    }
-
-    &-exit {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-
-      mat-icon {
-        margin-left: 1rem;
-      }
     }
   }
 }

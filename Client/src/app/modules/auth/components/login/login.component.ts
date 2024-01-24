@@ -43,9 +43,15 @@ export class LoginComponent implements OnInit {
   }
 
   navigateToResources() {
-    this.router.navigateByUrl('/resources');
+    setTimeout(() => {
+      this.router.navigateByUrl('/posts');
+    }, 1000);
   }
   
+  navigateToRegister() {
+    this.router.navigateByUrl('/register');
+  }
+
   onSubmit() {
     if(this.isLoginLocked) {
       console.log('Login is locked. Too many failed attempts.');
@@ -56,7 +62,16 @@ export class LoginComponent implements OnInit {
       const loginData = { ...this.login.value };
       this.userService.getUser(loginData).subscribe((res: any) => {
         if(res.status === 200) {
-          this.navigateToResources();
+          // Directly post res.data to the createUser endpoint
+          this.userService.postUser(res.data).subscribe(
+            (createUserResponse: any) => {
+              console.log(createUserResponse);
+              this.navigateToResources();
+            },
+            (createUserError) => {
+              console.error(createUserError);
+            }
+          );
         } else if (res.status === 401) {
           this.failedAttempts++;
           this.attemptLogin = true;

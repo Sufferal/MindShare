@@ -4,8 +4,16 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    pathMatch: 'full',
-    redirectTo: 'login',
+    pathMatch:'full',
+    redirectTo: 'login'
+  },
+  {
+    path: 'posts',
+    loadChildren: () => import('./modules').then(m => m.PostsModule),
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./modules').then(m => m.ProfileModule),
   },
   {
     path: '',

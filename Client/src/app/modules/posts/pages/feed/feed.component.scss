@@ -1,0 +1,28 @@
+.feed-wrapper {
+  padding: 5rem 0;
+  background-color: #F2DCA6;
+
+  .feed-header {
+    margin-bottom: 5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .feed-title {
+    font-size: 4rem;
+    font-weight: 700;
+    color: #000;
+  }
+
+  .feed-actions-group {
+    padding-right: 20px;
+  }
+}
+
+.post-form-init {
+  padding: 1rem 2rem;
+  border-radius: 5px;
+  background-color: var(--form-secondary-color);
+  color: #fff;
+}

@@ -1,0 +1,23 @@
+.comment-form-wrapper {
+    padding-top: 10px;
+    padding-bottom: 20px;
+
+    .comment-form {
+        margin-top: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+
+        .form-component {
+            width: 80%;
+        }
+
+        .btn.btn-comment {
+            margin-top: 2rem;
+            margin-left: 3rem;
+            max-width: 150px;
+            color: #fff;
+            background-color: #15bb4c;
+        }
+    }
+}
