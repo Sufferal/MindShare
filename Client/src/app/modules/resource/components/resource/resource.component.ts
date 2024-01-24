@@ -19,7 +19,7 @@ export class ResourceComponent implements OnInit {
           This article explores the multifaceted nature of motivation, delving
           into its psychological underpinnings, the role it plays in personal
           and professional realms, and strategies to cultivate and sustain it.`,
-      "image": "assets/img/motivation.png"
+      "image": "assets/img/resources/motivation.png"
     },
     {
       "title": "Discipline",
@@ -31,7 +31,7 @@ export class ResourceComponent implements OnInit {
           discipline, delving into its significance in various aspects of life,
           strategies for cultivating it, and the transformative impact it can
           have on individuals.`,
-      "image": "assets/img/discipline.png"
+      "image": "assets/img/resources/discipline.png"
     },
     {
       "title": "Emotions",
@@ -41,7 +41,7 @@ export class ResourceComponent implements OnInit {
           landscape of emotions, exploring their diverse nature, the importance
           of emotional intelligence, and the ways in which understanding and
           managing emotions can enrich personal and interpersonal dynamics.`,
-      "image": "assets/img/emotions.png"
+      "image": "assets/img/resources/emotions.png"
     },
   ];
   myControl = new FormControl('');

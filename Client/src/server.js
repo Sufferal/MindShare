@@ -6,10 +6,10 @@ const bodyParser = require("body-parser");
 let currentUser = {};
 const jsonData = [
   {
-    title: "Post 1",
+    title: "Literally me",
     author: "Seva",
     creationDate: new Date().toDateString(),
-    image: "assets/img/meme_1.png",
+    image: "assets/img/posts/meme_1.png",
     content:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, \
   sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\
@@ -22,12 +22,12 @@ const jsonData = [
       {
         author: "Dinu",
         creationDate: new Date().toDateString(),
-        content: "hello",
+        content: "lmao",
       },
       {
         author: "Dinu",
         creationDate: new Date().toDateString(),
-        content: "hello",
+        content: "wait a second",
       },
     ],
   },
@@ -35,7 +35,7 @@ const jsonData = [
     title: "Post 2",
     author: "Ciprian",
     creationDate: new Date().toDateString(),
-    image: "assets/img/meme_2.png",
+    image: "assets/img/posts/meme_2.png",
     content:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, \
   sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\
