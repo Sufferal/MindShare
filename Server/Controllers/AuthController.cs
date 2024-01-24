@@ -33,7 +33,7 @@ public class AuthController : ControllerBase
     {
         try
         {
-            var isValidToken = await _authService.ValidateTwoStepAuthToken(model.Username, model.Token);
+            var isValidToken = await _authService.TwoStepAuth(model.Username, model.Token);
 
             if (isValidToken)
             {
@@ -65,6 +65,28 @@ public class AuthController : ControllerBase
         }
     }
     
+    [HttpPost("two-step-activate")]
+    public async Task<IActionResult> ActivateTwoStepAuth([FromBody] TwoStepActivationModel model)
+    {
+        try
+        {   
+            var user = await _authService.TwoStepActivation(model.Username, model.IsActivated);
+            
+            if (model.IsActivated == false)
+            {
+                return Ok(new { status = 200, message = "Two factor authentication deactivated successfully" });
+            }
+            else
+            {
+                return Ok(new { status = 200, message = "Two factor authentication activated successfully" });
+            }
+        }
+        catch (Exception ex)
+        {
+            return Ok(new { status = 400, message = $"Failed to activate two factor authentication: {ex.Message}" });
+        }
+    }
+    
     [HttpGet("activate")]
     public async Task<IActionResult> ActivateAccount([FromQuery] ActivationModel model)
     {
@@ -78,4 +100,5 @@ public class AuthController : ControllerBase
             return Ok(new { status = 400, message = $"Activation failed: {ex.Message}" });
         }
     }
+    
 }

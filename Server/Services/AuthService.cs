@@ -61,42 +61,65 @@ public class AuthService
         {
             throw new ApplicationException("Invalid password.");
         }
-
-        var token = _twoStepAuthService.GenerateUniqueToken();
-
-        user.TwoStepAuthToken = token;
-        await _userRepository.UpdateUser(user);
-
-        _emailService.SendTokenViaEmail(user.Email, token);
+        
+        if (user.IsTwoFactorAuth)
+        {
+            var token = _twoStepAuthService.GenerateUniqueToken();
+        
+            user.TwoStepAuthToken = token;
+            await _userRepository.UpdateUser(user);
+        
+            _emailService.SendTokenViaEmail(user.Email, token);
+            throw new ApplicationException("Two-step authentication required.");
+        }
 
         return user;
     }
     
     public async Task<User> ActivateUser(int userId, string activationToken)
-    {
-        var user = await _userRepository.GetUserById(userId);
-
-        if (user == null || user.IsActivated)
-        {
-            throw new ApplicationException("Invalid user or account already activated.");
-        }
-        
-        if (!_accountActivationService.ValidateActivationToken(user, activationToken))
-        {
-            throw new ApplicationException("Invalid activation token.");
-        }
-
-        user.IsActivated = true;
-        return await _userRepository.UpdateUser(user);
-    }
-
-    public async Task<bool> ValidateTwoStepAuthToken(string username, string providedToken)
+         {
+             var user = await _userRepository.GetUserById(userId);
+     
+             if (user == null || user.IsActivated)
+             {
+                 throw new ApplicationException("Invalid user or account already activated.");
+             }
+             
+             if (!_accountActivationService.ValidateActivationToken(user, activationToken))
+             {
+                 throw new ApplicationException("Invalid activation token.");
+             }
+     
+             user.IsActivated = true;
+             return await _userRepository.UpdateUser(user);
+         }
+    
+    public async Task<User> TwoStepActivation(string username, bool isTwoFactorAuth)
     {
         var user = await _authRepository.GetUserByUsername(username);
 
         if (user == null)
         {
             throw new ApplicationException("User not found.");
+        }
+        
+        user.IsTwoFactorAuth = isTwoFactorAuth;
+        return await _userRepository.UpdateUser(user);
+    }
+    
+
+    public async Task<bool> TwoStepAuth(string username, string providedToken)
+    {
+        var user = await _authRepository.GetUserByUsername(username);
+
+        if (user == null)
+        {
+            throw new ApplicationException("User not found.");
+        }
+        
+        if (user.IsTwoFactorAuth == false)
+        {
+            throw new ApplicationException("Two-step authentication not activated.");
         }
 
         return string.Equals(user.TwoStepAuthToken, providedToken, StringComparison.Ordinal);
