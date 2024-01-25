@@ -8,12 +8,13 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ProfileService {
-  url: string = environment.apiUrlDiff;
+  url: string = environment.apiUrl;
+  urlDiff: string = environment.apiUrlDiff;
 
   constructor(private http: HttpClient) { }
 
   getUser(): Observable<any> {
-    return this.http.get<any>(`${this.url}/user`);
+    return this.http.get<any>(`${this.urlDiff}/user`);
   }
 
   updateUser(updatedUser: any): any {
@@ -23,6 +24,10 @@ export class ProfileService {
       })
     };
 
-    return this.http.put<any>(`${this.url}/user/update`, updatedUser, httpOptions);
+    return this.http.put<any>(`${this.urlDiff}/user/update`, updatedUser, httpOptions);
+  }
+
+  toggle2FA(user: any): any {
+    return this.http.post<any>(`${this.url}/two-step-activate`, user);
   }
 }

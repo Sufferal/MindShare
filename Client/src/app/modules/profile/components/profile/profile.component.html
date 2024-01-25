@@ -26,6 +26,16 @@
               <strong>Email:</strong> {{ user.email }}
             </mat-list-item>
           </div>
+          <div class="user-profile-line fa2">
+            <mat-list-item>
+              <strong>2 Factor Authentication:</strong>
+              <label class="switch">
+                <input id="toggle2fa" type="checkbox" [(ngModel)]="is2faEnabled" (change)="onToggle2fa()">
+                <span class="slider round"></span>
+              </label>
+              <!-- {{ user.isActivated }} -->
+            </mat-list-item>
+          </div>
         </mat-list>
       </mat-card-content>
     </mat-card>
