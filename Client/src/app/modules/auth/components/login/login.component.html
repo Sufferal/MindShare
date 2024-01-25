@@ -30,6 +30,7 @@
       Don't have an account yet? <a class="form-link" (click)="this.navigateToRegister()">Sign up</a>
     </p>
     <p *ngIf="this.isLoginLocked" class="form-error-invalid error-msg">Too many failed login attempts. <br> Please try again later.</p>
+    <p *ngIf="this.isAccountActivated === 'not activated'" class="form-error-invalid error-msg">Account is not activated.</p>
     <button class="form-submit btn btn-form" type="submit" 
     [ngClass]="{'disabled': !this.login.valid && this.login.dirty}" 
     [disabled]="!this.login.valid && this.login.dirty">Log In</button>

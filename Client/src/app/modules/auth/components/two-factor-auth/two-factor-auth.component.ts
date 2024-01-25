@@ -31,7 +31,7 @@ export class TwoFactorAuthComponent {
         setTimeout(() => {
           this.router.navigateByUrl('/posts');
         }, 1000);
-      } else if (res.status === 401 && res.message === 'Invalid two-step authentication token.') {
+      } else if (res.status === 401 && res.message === 'Two-step authentication failed: Invalid two-step authentication token.') {
         this.invalidToken = true;
       }
     });
