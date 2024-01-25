@@ -33,16 +33,9 @@ public class AuthController : ControllerBase
     {
         try
         {
-            var isValidToken = await _authService.TwoStepAuth(model.Username, model.Token);
+            var user = await _authService.TwoStepAuth(model.Username, model.Token);
+            return Ok(new { status = 200, message = $"Two-step authentication successful for user {model.Username}", data = user });
 
-            if (isValidToken)
-            {
-                return Ok(new { status = 200, message = $"Two-step authentication successful for user {model.Username}", data = model });
-            }
-            else
-            {
-                return Ok(new { status = 401, message = "Invalid two-step authentication token." });
-            }
         }
         catch (Exception ex)
         {
