@@ -13,11 +13,18 @@
         }
 
         .btn.btn-comment {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             margin-top: 2rem;
             margin-left: 3rem;
             max-width: 150px;
             color: #fff;
-            background-color: #15bb4c;
+            background-color: var(--form-secondary-color);
+
+            mat-icon {
+              margin-left: 1rem;
+            }
         }
     }
 }
