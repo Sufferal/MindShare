@@ -239,3 +239,5 @@ Server/bin/
 *__pycache__/
 *venv/
 *emailsettings.json
+*.vscode/
+*.sln
