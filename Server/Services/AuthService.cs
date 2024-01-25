@@ -38,7 +38,8 @@ public class AuthService
             Salt = hashedPassword.PasswordSalt,
             IsActivated = false,
             ActivationToken = activationToken,
-            TwoStepAuthToken = "null"
+            TwoStepAuthToken = "null",
+            TokenCreationTime = DateTime.MinValue
         };
         
         var registeredUser = await _authRepository.RegisterUser(user);
@@ -64,12 +65,13 @@ public class AuthService
         
         if (user.IsTwoFactorAuth)
         {
-            var token = _twoStepAuthService.GenerateUniqueToken();
+            var uniqueToken = _twoStepAuthService.GenerateUniqueToken();
         
-            user.TwoStepAuthToken = token;
+            user.TwoStepAuthToken = uniqueToken.token;
+            user.TokenCreationTime = uniqueToken.timestamp;
             await _userRepository.UpdateUser(user);
         
-            _emailService.SendTokenViaEmail(user.Email, token);
+            _emailService.SendTokenViaEmail(user.Email, uniqueToken.token);
             throw new ApplicationException("Two-step authentication required.");
         }
 
@@ -123,11 +125,27 @@ public class AuthService
             throw new ApplicationException("Two-step authentication not activated.");
         }
         
+        if (!_twoStepAuthService.IsTokenExpired(user.TokenCreationTime))
+        {
+            var uniqueToken = _twoStepAuthService.GenerateUniqueToken();
+        
+            user.TwoStepAuthToken = uniqueToken.token;
+            user.TokenCreationTime = uniqueToken.timestamp;
+            await _userRepository.UpdateUser(user);
+        
+            _emailService.SendTokenViaEmail(user.Email, uniqueToken.token);
+            throw new ApplicationException("Two-step authentication token expired.");
+        }
+        
         if (!string.Equals(user.TwoStepAuthToken, providedToken, StringComparison.Ordinal))
         {
             throw new ApplicationException("Invalid two-step authentication token.");
         }
-
+        
+        user.TwoStepAuthToken = "null";
+        user.TokenCreationTime = DateTime.MinValue;
+        await _userRepository.UpdateUser(user);
+        
         return user;
 
     }

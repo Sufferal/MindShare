@@ -6,14 +6,27 @@ namespace Server.Services;
 
 public class TwoStepAuthService
 {
-    public string GenerateUniqueToken()
+    private const int TokenSizeInBytes = 16; // 128 bits
+    private const int TokenExpirationMinutes = 1;
+
+    public (string token, DateTime timestamp) GenerateUniqueToken()
     {
-        using (var rng = new System.Security.Cryptography.RNGCryptoServiceProvider())
-        {
-            var tokenBytes = new byte[32]; // 256 bits for a secure token
-            rng.GetBytes(tokenBytes);
-            return Convert.ToBase64String(tokenBytes);
-        }
+        using var rng = new System.Security.Cryptography.RNGCryptoServiceProvider();
+        var tokenBytes = new byte[TokenSizeInBytes];
+        rng.GetBytes(tokenBytes);
+
+        var token = Convert.ToBase64String(tokenBytes);
+        var timestamp = DateTime.UtcNow;
+
+        return (token, timestamp);
     }
 
+    public bool IsTokenExpired(DateTime timestamp)
+    {
+        // Calculate the age of the token
+        var age = DateTime.UtcNow - timestamp;
+
+        // Check if the token has expired
+        return age <= TimeSpan.FromMinutes(TokenExpirationMinutes);
+    }
 }
