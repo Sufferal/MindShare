@@ -15,4 +15,5 @@ public class User
     public string ActivationToken { get; set; }
     public bool IsTwoFactorAuth { get; set; }
     public string TwoStepAuthToken { get; set; }
+    public DateTime TokenCreationTime { get; set; }
 }
