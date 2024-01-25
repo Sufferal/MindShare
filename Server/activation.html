@@ -1,21 +1,49 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Activation</title>
     <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            flex-direction: column;
-            text-align: center; 
-        }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Helvetica, sans-serif;
+      }
+
+      body {
+        width: 100vw;
+        height: 100vh;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        text-align: center;
+      }
+
+      .green {
+        color: green;
+      }
+
+      .red {
+        color: red;
+      }
+
+      .title {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
+
+      .subtitle {
+        font-size: 1.75rem;
+      }
     </style>
-</head>
-<body>
-<h1>Account activation successful</h1>
-<h2>You can now close this page.</h2>
-</body>
+  </head>
+  <body>
+    <h1 class="title">Account has been <span class="green">successfully</span> activated!</h1>
+    <h2 class="subtitle">You can <span class="red">close</span> this page now.</h2>
+  </body>
 </html>
