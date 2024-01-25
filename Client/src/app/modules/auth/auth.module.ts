@@ -14,9 +14,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogClose, MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { TwoFactorAuthComponent } from './components/two-factor-auth/two-factor-auth.component';
+import { ActivationModalComponent } from './components/activation-modal/activation-modal.component';
 
 @NgModule({
-  declarations: [AuthPageComponent, RegisterComponent, LoginComponent, AccActivationPageComponent, TwoFactorAuthComponent],
+  declarations: [AuthPageComponent, RegisterComponent, LoginComponent, AccActivationPageComponent, TwoFactorAuthComponent, ActivationModalComponent],
   imports: [
     CommonModule,
     HttpClientModule,

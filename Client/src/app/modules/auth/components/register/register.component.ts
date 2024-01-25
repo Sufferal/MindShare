@@ -17,6 +17,8 @@ import {
   passwordMatcher,
   strongPasswordValidator,
 } from '../../utils/register.validator';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivationModalComponent } from '../activation-modal/activation-modal.component';
 
 @Component({
   selector: 'app-register',
@@ -34,7 +36,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private userService: AuthApiService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -137,14 +140,22 @@ export class RegisterComponent implements OnInit {
       };
 
       this.userService.createUser(user).subscribe((res: any) => {
+        console.log(res)
         if (res.status === 200) {
-          this.navigateToLogin();
+          this.openActivationModal();
+          // this.navigateToLogin();
         }
-
-        console.log(res);
       });
     } else {
       this.socialDetails.markAllAsTouched();
     }
+  }
+
+  openActivationModal(): void {
+    const dialogRef = this.dialog.open(ActivationModalComponent);
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.router.navigate(['/login']);
+    });
   }
 }

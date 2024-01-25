@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   attemptLogin: boolean = false;
   failedAttempts: number = 0;
   isLoginLocked: boolean = false;
+  isAccountActivated: any = null;
 
   public readonly emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
 
@@ -74,7 +75,9 @@ export class LoginComponent implements OnInit {
             }
           );
         } else if (res.status === 401) {
-          if(res.message === 'Login failed: Two-step authentication required.') {
+          if(res.message === 'Login failed: Account not activated.') {
+            this.isAccountActivated = 'not activated';
+          } else if(res.message === 'Login failed: Two-step authentication required.') {
            const user = {
               username: loginData.username,
               password: loginData.password,

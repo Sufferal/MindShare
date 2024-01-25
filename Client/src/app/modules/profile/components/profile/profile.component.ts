@@ -14,7 +14,7 @@ export class ProfileComponent {
   constructor(private profileService: ProfileService) { }
 
   ngOnInit(): void {
-    this.is2faEnabled = this.user.isActivated;
+    this.is2faEnabled = this.user.isTwoFactorAuth;
   }
 
   onToggle2fa(): void {
