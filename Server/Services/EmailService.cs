@@ -29,10 +29,10 @@ public class EmailService
                 From = new MailAddress(smtpUsername),
                 Subject = "Account Activation",
                 Body = $"Hello {user.FirstName},\n\n" +
-                       $"Please click on the following link to activate your account:\n" +
-                       $"{activationLink}\n\n" +
-                       "Thank you!",
-                IsBodyHtml = false
+                   $"Please click on the following link to activate your account:\n" +
+                   $"<a href=\"{activationLink}\" target=\"_blank\">Activate Account</a>\n\n" +
+                   "Thank you!",
+                IsBodyHtml = true
             };
 
             mailMessage.To.Add(user.Email);
