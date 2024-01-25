@@ -107,12 +107,13 @@ public class AuthService
         return await _userRepository.UpdateUser(user);
     }
     
-
     public async Task<User> TwoStepAuth(string username, string providedToken)
+
     {
         var user = await _authRepository.GetUserByUsername(username);
 
         if (user == null)
+
         {
             throw new ApplicationException("User not found.");
         }
@@ -128,5 +129,6 @@ public class AuthService
         }
 
         return user;
+
     }
 }

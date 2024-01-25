@@ -35,7 +35,7 @@ public class AuthController : ControllerBase
         {
             var user = await _authService.TwoStepAuth(model.Username, model.Token);
             return Ok(new { status = 200, message = $"Two-step authentication successful for user {model.Username}", data = user });
-            
+
         }
         catch (Exception ex)
         {
@@ -86,7 +86,13 @@ public class AuthController : ControllerBase
         try
         {
             var user = await _authService.ActivateUser(model.UserId, model.ActivationToken);
-            return Ok(new { status = 200, message = "Account activated successfully" });
+            var htmlFilePath = Path.Combine(Directory.GetCurrentDirectory(), "activation.html");
+            if (!System.IO.File.Exists(htmlFilePath))
+            {
+                return NotFound();
+            }
+
+            return PhysicalFile(htmlFilePath, "text/html");
         }
         catch (Exception ex)
         {
