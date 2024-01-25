@@ -10,9 +10,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { AuthRoutingModule } from './auth-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AccActivationPageComponent } from './pages/acc-activation-page/acc-activation-page.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDialogClose, MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { TwoFactorAuthComponent } from './components/two-factor-auth/two-factor-auth.component';
 
 @NgModule({
-  declarations: [AuthPageComponent, RegisterComponent, LoginComponent, AccActivationPageComponent],
+  declarations: [AuthPageComponent, RegisterComponent, LoginComponent, AccActivationPageComponent, TwoFactorAuthComponent],
   imports: [
     CommonModule,
     HttpClientModule,
@@ -20,6 +24,9 @@ import { AccActivationPageComponent } from './pages/acc-activation-page/acc-acti
     ReactiveFormsModule,
     FormsModule,
     MatIconModule,
+    MatFormFieldModule,
+    MatDialogModule,
+    MatInputModule
   ],
 })
 export class AuthModule {}

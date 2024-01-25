@@ -1,0 +1,6 @@
+<div class="container">
+  <h2 class="tokenTitle">Enter 2FA token from your email:</h2>
+  <input class="tokenInput" type="text" id="token2fa" [(ngModel)]="token">
+  <p *ngIf="invalidToken" class="error-msg">Invalid token</p>
+  <button class="tokenButton" (click)="submitToken()">Submit</button>
+</div>
