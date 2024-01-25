@@ -108,7 +108,7 @@ public class AuthService
     }
     
 
-    public async Task<bool> TwoStepAuth(string username, string providedToken)
+    public async Task<User> TwoStepAuth(string username, string providedToken)
     {
         var user = await _authRepository.GetUserByUsername(username);
 
@@ -121,7 +121,12 @@ public class AuthService
         {
             throw new ApplicationException("Two-step authentication not activated.");
         }
+        
+        if (!string.Equals(user.TwoStepAuthToken, providedToken, StringComparison.Ordinal))
+        {
+            throw new ApplicationException("Invalid two-step authentication token.");
+        }
 
-        return string.Equals(user.TwoStepAuthToken, providedToken, StringComparison.Ordinal);
+        return user;
     }
 }
