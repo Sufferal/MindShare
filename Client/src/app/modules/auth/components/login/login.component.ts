@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   attemptLogin: boolean = false;
   failedAttempts: number = 0;
   isLoginLocked: boolean = false;
+  isAccountActivated: any = null;
 
   public readonly emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
 
@@ -62,6 +63,7 @@ export class LoginComponent implements OnInit {
       const loginData = { ...this.login.value };
       this.userService.getUser(loginData).subscribe((res: any) => {
         if(res.status === 200) {
+          console.log(res);
           // Directly post res.data to the createUser endpoint
           this.userService.postUser(res.data).subscribe(
             (createUserResponse: any) => {
@@ -73,6 +75,29 @@ export class LoginComponent implements OnInit {
             }
           );
         } else if (res.status === 401) {
+          if(res.message === 'Login failed: Account not activated.') {
+            this.isAccountActivated = 'not activated';
+          } else if(res.message === 'Login failed: Two-step authentication required.') {
+           const user = {
+              username: loginData.username,
+              password: loginData.password,
+           };
+
+           console.log(user);
+
+           this.userService.postUser(user).subscribe(
+              (createUserResponse: any) => {
+                console.log(createUserResponse);
+                // this.navigateToResources();
+              },
+              (createUserError) => {
+                console.error(createUserError);
+              }
+            );
+
+            this.router.navigateByUrl('/login-2fa');
+          }
+          
           this.failedAttempts++;
           this.attemptLogin = true;
           console.log(res);

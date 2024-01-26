@@ -4,15 +4,15 @@
       <a (click)="navigateToUrl('/posts')">MindShare</a>
     </h2>
     <div class="links">
-      <a class="link" (click)="navigateToUrl('/posts')">
+      <a class="link" routerLink="/posts" routerLinkActive="active">
         <mat-icon>explore</mat-icon>
         Posts
       </a>
-      <a class="link" (click)="navigateToUrl('/resources')">
+      <a class="link" routerLink="/resources" routerLinkActive="active">
         <mat-icon>collections_bookmark</mat-icon>
         Resources
       </a>
-      <a class="link" (click)="navigateToUrl('/profile')">
+      <a class="link" routerLink="/profile" routerLinkActive="active">
         <mat-icon>account_circle</mat-icon>
         User profile
       </a>

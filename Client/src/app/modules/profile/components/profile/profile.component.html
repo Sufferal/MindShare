@@ -1,33 +1,53 @@
-<div class="user-profile-wrapper">
-    <mat-card>
-      <mat-card-content>
-        <mat-list>
-          <div class="user-profile-line">
-            <mat-list-item>
-              <strong>First Name:</strong> {{ user.firstName }}
-            </mat-list-item>
-            <mat-list-item>
-              <strong>Last Name:</strong> {{ user.lastName }}
-            </mat-list-item>
-          </div>
-          <div class="user-profile-line">
-            <mat-list-item>
-              <strong>Date of Birth:</strong> {{ user.dateOfBirth }}
-            </mat-list-item>
-            <mat-list-item>
-              <strong>Gender:</strong> {{ user.gender }}
-            </mat-list-item>
-          </div>
-          <div class="user-profile-line">
-            <mat-list-item>
-              <strong>Username:</strong> {{ user.username }}
-            </mat-list-item>
-            <mat-list-item>
-              <strong>Email:</strong> {{ user.email }}
-            </mat-list-item>
-          </div>
-        </mat-list>
-      </mat-card-content>
-    </mat-card>
+<div class="container">
+  <h2 class="profile-category">Social</h2>
+  <div class="profile-item">
+    <mat-icon>wb_sunny</mat-icon>
+    <h2 class="item-label">Username: </h2>
+    <p class="item-value">{{ user.username }}</p>  
   </div>
+  <div class="profile-item">
+    <mat-icon> email</mat-icon>
+    <h2 class="item-label">Email:</h2>
+    <p class="item-value">{{ user.email }}</p>
+  </div>
+  
+  <h2 class="profile-category">Personal</h2>
+  <div class="profile-item">
+    <mat-icon>account_box</mat-icon>
+    <h2 class="item-label">First Name: </h2>
+    <p class="item-value">{{ user.firstName }}</p>
+  </div>
+  <div class="profile-item">
+    <mat-icon>person</mat-icon>
+    <h2 class="item-label">Last Name:</h2>
+    <p class="item-value">{{ user.lastName }}</p>
+  </div>
+  <div class="profile-item">
+    <mat-icon>date_range</mat-icon>
+    <h2 class="item-label">Date of Birth:</h2>
+    <p class="item-value">{{ user.dateOfBirth }}</p>  
+  </div>
+  <div class="profile-item">
+    <mat-icon>pregnant_woman</mat-icon>
+    <h2 class="item-label">Gender:</h2>
+    <p class="item-value">{{ user.gender }}</p>
+  </div>
+  
+  <h2 class="profile-category">Security</h2>
+  <div class="profile-item no-margin">
+    <mat-icon>update</mat-icon>
+    <h2 class="item-label">Account status:</h2>
+    <p class="item-value item-value-bold" [ngStyle]="{'color': user.isActivated ? 'green' : 'red'}">
+      {{ user.isActivated ? 'activated' : 'not activated' }}
+    </p>  
+  </div>
+  <div class="profile-item">
+    <mat-icon>lock_open</mat-icon>
+    <h2 class="item-label">Two-Factor Authentication (2FA):</h2>
+    <label class="switch">
+      <input id="toggle2fa" type="checkbox" [(ngModel)]="is2faEnabled" (change)="onToggle2fa()">
+      <span class="slider round"></span>
+    </label>
+  </div>
+</div>
   

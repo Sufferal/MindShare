@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Server.Data;
 
@@ -10,9 +11,11 @@ using Server.Data;
 namespace Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240123175449_TwoStepAuth3")]
+    partial class TwoStepAuth3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.12");
@@ -71,9 +74,6 @@ namespace Server.Migrations
                     b.Property<bool>("IsActivated")
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("IsTwoFactorAuth")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -85,9 +85,6 @@ namespace Server.Migrations
 
                     b.Property<string>("Salt")
                         .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("TokenCreationTime")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("TwoStepAuthToken")
