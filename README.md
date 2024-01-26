@@ -44,4 +44,11 @@ Users can see the data they provided when they registered on the platform. They 
 ### Register
 ![Register](./Client/src/assets/img/pages/register.png)
 
-###
+### Posts
+![Posts](./Client/src/assets/img/pages/posts.png)
+
+### Resources
+![Resources](./Client/src/assets/img/pages/resources.png)
+
+### Profile
+![Profile](./Client/src/assets/img/pages/profile.png)
