@@ -1,6 +1,13 @@
 # MindShare
 Social media platform for sharing your thoughts and ideas with the world.
 
+## Contributors
+
+- [Grena30](https://github.com/Grena30)
+- [Sufferal](https://github.com/Sufferal)
+- [Syn4z](https://github.com/Syn4z)
+- [lavanda888boy](https://github.com/lavanda888boy)
+
 ## Dependencies
 
 ### Frontend
